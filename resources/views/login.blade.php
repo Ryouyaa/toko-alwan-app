@@ -17,18 +17,40 @@
         <div class="container-fluid page-body-wrapper">
 
             <main class="form-signin m-auto">
-                <form action="/">
+                <form action="/login" method="post">
+                    @csrf
                     <div class="text-center">
                         <h1>Aplikasi Logistik</h1>
                         <img class="mb-4" src="/images/logo.png" alt="logo">
                     </div>
+
+                    @if (session()->has('loginError'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('loginError') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    @endif
+
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Email address</label>
+                        <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
+                            id="username" placeholder="Masukkan Username" autofocus value="{{ old('username') }}">
+                        <label for="username">Username</label>
+                        @error('username')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
+                        <input type="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror" id="password"
+                            placeholder="Masukkan Password">
+                        <label for="password">Password</label>
+                        @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                     <div class="text-center">
                         <button class="btn btn-primary w-50 py-2" type="submit">Masuk</button>
