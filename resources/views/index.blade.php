@@ -12,6 +12,14 @@
             <p>Back to <a href="/docs/5.3/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
         </div>
     </main>
+    <div class="col-lg-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Line chart</h4>
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+      </div>
 </div>
 
 @endsection
