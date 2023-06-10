@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 Route::get('/tambah-barang', function () {
     return view('barang.tambah-barang');
@@ -46,10 +47,5 @@ Route::get('/barang-keluar', function () {
     return view('update.barang-keluar');
 });
 
-Route::get('/profil', function () {
-    return view('admin.profil');
-});
-
-Route::get('/ubah-sandi', function () {
-    return view('admin.ubah-sandi');
-});
+Route::get('/profil', [AdminController::class, 'index'])->middleware('auth');
+Route::get('/ubah-sandi', [AdminController::class, 'sandi'])->middleware('auth');
