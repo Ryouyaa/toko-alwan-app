@@ -18,15 +18,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/tambah-barang', function () {
     return view('barang.tambah-barang');
