@@ -54,7 +54,7 @@
                                 <td>
                                     15
                                 </td>
-                                <td class="py-0">
+                                <td>
                                     <a href="/form-barang-hilang" class="btn btn-primary btn-sm">Pilih</a>
                                 </td>
                             </tr>
@@ -71,7 +71,7 @@
                                 <td>
                                     15
                                 </td>
-                                <td class="py-0">
+                                <td>
                                     <a href="/form-barang-hilang" class="btn btn-primary btn-sm">Pilih</a>
                                 </td>
                             </tr>
