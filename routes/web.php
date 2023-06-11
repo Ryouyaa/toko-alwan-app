@@ -47,5 +47,8 @@ Route::get('/barang-keluar', function () {
     return view('update.barang-keluar');
 });
 
-Route::get('/profil', [AdminController::class, 'index'])->middleware('auth');
-Route::get('/ubah-sandi', [AdminController::class, 'sandi'])->middleware('auth');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/profil', [AdminController::class, 'index']);
+    Route::get('/ubah-sandi', [AdminController::class, 'sandi']);
+    Route::post('/ubah-sandi', [AdminController::class, 'ubahSandi']);
+});
