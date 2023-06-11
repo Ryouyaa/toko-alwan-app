@@ -28,8 +28,8 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="/barang-hilang">Daftar Barang Hilang</a></li>
-          <li class="nav-item"> <a class="nav-link" href="#">Tambah Barang Hilang</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/daftar-hilang">Daftar Barang Hilang</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/barang-hilang">Tambah Barang Hilang</a></li>
         </ul>
       </div>
     </li>

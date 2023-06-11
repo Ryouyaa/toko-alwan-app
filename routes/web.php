@@ -27,11 +27,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // BARANG
 Route::get('/daftar-barang', [BarangController::class, 'index']);
+Route::get('/barang-masuk', [BarangController::class, 'tambahView']);
+Route::get('/barang-keluar', [BarangController::class, 'keluarView']);
 
 Route::get('/tambah-barang', function () {
     return view('barang.tambah-barang');
 });
-
 
 Route::get('/barang-hilang', function () {
     return view('barang.hilang.cari');
@@ -41,12 +42,8 @@ Route::get('/form-barang-hilang', function () {
     return view('barang.hilang.form');
 });
 
-Route::get('/barang-masuk', function () {
-    return view('update.barang-masuk');
-});
-
-Route::get('/barang-keluar', function () {
-    return view('update.barang-keluar');
+Route::get('/daftar-hilang', function () {
+    return view('barang.hilang.daftar');
 });
 
 // ADMIN

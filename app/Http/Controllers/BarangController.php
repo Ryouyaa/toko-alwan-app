@@ -19,6 +19,16 @@ class BarangController extends Controller
         ]);
     }
 
+    public function tambahView()
+    {
+        return view('barang.barang-masuk');
+    }
+
+    public function keluarView()
+    {
+        return view('barang.barang-keluar');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
