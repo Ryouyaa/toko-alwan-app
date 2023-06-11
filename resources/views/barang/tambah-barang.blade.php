@@ -39,8 +39,9 @@
                                 <option selected>Pilih satuan barang</option>
                                 <option value="">pcs</option>
                                 <option value="">lusin</option>
-                                <option value="">pack</option>
-                                <option value="">karton</option>
+                                <option value="">kodi</option>
+                                <option value="">gross</option>
+                                <option value="">rim</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
@@ -68,7 +69,7 @@
                         </tr>
                         <tr>
                             <td>1 Rim</td>
-                            <td>: 200 Pcs (lembar)</td>
+                            <td>: 500 Pcs (lembar)</td>
                         </tr>
                     </table>
                 </div>             

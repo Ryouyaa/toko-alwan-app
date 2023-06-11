@@ -14,7 +14,7 @@
                             <p class="mb-0">Nama</p>
                         </div>
                         <div class="col-sm-9">
-                            <p class="text-muted mb-0">Johnatan Smith</p>
+                            <p class="text-muted mb-0">{{ $user->name }}</p>
                         </div>
                     </div>
                     <hr>
@@ -23,7 +23,7 @@
                             <p class="mb-0">Handphone</p>
                         </div>
                         <div class="col-sm-9">
-                            <p class="text-muted mb-0">(097) 234-5678</p>
+                            <p class="text-muted mb-0">{{ $user->nomor_hp }}</p>
                         </div>
                     </div>
                     <hr>
@@ -32,7 +32,7 @@
                             <p class="mb-0">Alamat</p>
                         </div>
                         <div class="col-sm-9">
-                            <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                            <p class="text-muted mb-0">{{ $user->alamat }}</p>
                         </div>
                     </div>
                     <hr>
@@ -41,7 +41,7 @@
                             <p class="mb-0">Mulai Kerja</p>
                         </div>
                         <div class="col-sm-9">
-                            <p class="text-muted mb-0">01 Juli 2021</p>
+                            <p class="text-muted mb-0">{{ $user->mulai_kerja }}</p>
                         </div>
                     </div>
                 </div>
