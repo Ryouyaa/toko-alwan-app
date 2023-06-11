@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,17 +20,18 @@ Route::get('/', function () {
     return view('index');
 });
 
+// LOGIN
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
+
+// BARANG
+Route::get('/daftar-barang', [BarangController::class, 'index']);
 
 Route::get('/tambah-barang', function () {
     return view('barang.tambah-barang');
 });
 
-Route::get('/daftar-barang', function () {
-    return view('barang.daftar-barang');
-});
 
 Route::get('/barang-hilang', function () {
     return view('barang.hilang.cari');
@@ -47,6 +49,7 @@ Route::get('/barang-keluar', function () {
     return view('update.barang-keluar');
 });
 
+// ADMIN
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/profil', [AdminController::class, 'index']);
     Route::get('/ubah-sandi', [AdminController::class, 'sandi']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Barang;
 use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
@@ -13,7 +14,9 @@ class BarangController extends Controller
      */
     public function index()
     {
-        //
+        return view('barang.daftar-barang', [
+            "barangs" => DB::table('barangs')->paginate(15)
+        ]);
     }
 
     /**

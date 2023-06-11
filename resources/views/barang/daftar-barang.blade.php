@@ -30,62 +30,31 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($barangs as $barang)    
                             <tr>
                                 <td>
-                                    1
+                                    {{ $barangs->firstItem() + $loop->index }}
                                 </td>
                                 <td>
-                                    Spidol Hitam Permanent
+                                    {{ $barang->name }}
                                 </td>
                                 <td>
-                                    33
+                                    {{ $barang->jumlah_stok }}
                                 </td>
                                 <td>
-                                    15
-                                </td>
-                                <td class="py-0">
-                                    <a href="" class="btn btn-warning btn-sm">Ubah</a>
-                                    <a href="" class="btn btn-danger btn-sm">Hapus</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Spidol Hitam Permanent
-                                </td>
-                                <td>
-                                    33
-                                </td>
-                                <td>
-                                    15
+                                    {{ $barang->stok_minimum }}
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-warning btn-sm">Ubah</a>
                                     <a href="" class="btn btn-danger btn-sm">Hapus</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Spidol Hitam Permanent
-                                </td>
-                                <td>
-                                    33
-                                </td>
-                                <td>
-                                    15
-                                </td>
-                                <td>
-                                    <a href="" class="btn btn-warning btn-sm">Ubah</a>
-                                    <a href="" class="btn btn-danger btn-sm">Hapus</a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-3">
+                    {{ $barangs->links() }}
                 </div>
             </div>
         </div>
