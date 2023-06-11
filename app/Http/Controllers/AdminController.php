@@ -32,7 +32,7 @@ class AdminController extends Controller
 
 
         #Match The Old Password
-        if(!Hash::check($request->passwordBaru, auth()->user()->password)){
+        if(!Hash::check($request->passwordLama, auth()->user()->password)){
             return back()->with("error", "Old Password Doesn't match!");
         }
 

@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label for="konfirmasiPassword">{{ __('Konfirmasi Password') }}</label>
-                            <input name="password_confirmation" type="password" class="form-control @error('konfirmasiPassword') is-invalid @enderror"
+                            <input name="passwordBaru_confirmation" type="password" class="form-control @error('konfirmasiPassword') is-invalid @enderror"
                                 id="konfirmasiPassword" placeholder="Masukkan kembali password baru">
                                 @error('konfirmasiPassword')
                                 <span class="invalid-feedback" role="alert">
