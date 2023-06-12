@@ -13,7 +13,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    ID
+                                    No
                                 </th>
                                 <th>
                                     Nama Barang

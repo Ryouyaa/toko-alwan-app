@@ -3,7 +3,7 @@
 @section('content-wrapper')
 
 <div class="content-wrapper">
-    <h2 class="welcome-text mb-3">Daftar Barang</h2>
+    <h2 class="welcome-text mb-3">Daftar Barang Hilang</h2>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -13,16 +13,16 @@
                         <thead>
                             <tr>
                                 <th>
-                                    ID
+                                    No
                                 </th>
                                 <th>
                                     Nama Barang
                                 </th>
                                 <th>
-                                    Stok Barang
+                                    Jumlah Hilang
                                 </th>
                                 <th>
-                                    Stok Minimum
+                                    Detail
                                 </th>
                                 <th>
                                     Aksi
@@ -30,19 +30,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($barangs as $barang)    
+                            @foreach ($losts as $lost)    
                             <tr>
                                 <td>
-                                    {{ $barangs->firstItem() + $loop->index }}
+                                    {{ $losts->firstItem() + $loop->index }}
                                 </td>
                                 <td>
-                                    {{ $barang->name }}
+                                    {{ $lost->barang->name }}
                                 </td>
                                 <td>
-                                    {{ $barang->jumlah_stok }}
+                                    {{ $lost->jumlah_stok }}
                                 </td>
                                 <td>
-                                    {{ $barang->stok_minimum }}
+                                    {{ $lost->detail }}
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-warning btn-sm">Ubah</a>
@@ -54,7 +54,7 @@
                     </table>
                 </div>
                 <div class="mt-3">
-                    {{ $barangs->links() }}
+                    {{ $losts->links() }}
                 </div>
             </div>
         </div>

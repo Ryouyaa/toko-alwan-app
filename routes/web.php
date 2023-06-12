@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\LostController;
+use App\Models\Lost;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,17 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // BARANG
 Route::get('/daftar-barang', [BarangController::class, 'index']);
+
+// BARANG HILANG
+Route::get('/daftar-hilang', [LostController::class, 'index']);
+
+// Route::get('/daftar-hilang', function ()
+// {
+//     return view('barang.hilang.daftar', [
+//         "losts" => Lost::all()
+//     ]);
+// });
+
 
 Route::get('/tambah-barang', function () {
     return view('barang.tambah-barang');

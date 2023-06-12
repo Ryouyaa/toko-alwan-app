@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Lost;
 use App\Http\Requests\StoreLostRequest;
 use App\Http\Requests\UpdateLostRequest;
@@ -13,8 +14,11 @@ class LostController extends Controller
      */
     public function index()
     {
-        //
+        return view('barang.hilang.daftar', [
+            "losts" => DB::table('losts')->get()->paginate(15)
+        ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
