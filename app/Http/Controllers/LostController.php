@@ -14,9 +14,8 @@ class LostController extends Controller
      */
     public function index()
     {
-        return view('barang.hilang.daftar', [
-            "losts" => DB::table('losts')->get()->paginate(15)
-        ]);
+        $losts = Lost::with('barang')->paginate(15);
+        return view('barang.hilang.daftar', compact('losts'));
     }
 
     /**

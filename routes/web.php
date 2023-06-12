@@ -53,10 +53,6 @@ Route::get('/form-barang-hilang', function () {
     return view('barang.hilang.form');
 });
 
-Route::get('/daftar-hilang', function () {
-    return view('barang.hilang.daftar');
-});
-
 // ADMIN
 Route::group(['middleware' => 'auth'], function () {
     
