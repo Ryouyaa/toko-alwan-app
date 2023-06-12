@@ -54,7 +54,7 @@
                                 <td>
                                     15
                                 </td>
-                                <td class="py-0">
+                                <td>
                                     <a href="" class="btn btn-primary btn-sm">Tambahkan ke list</a>
                                 </td>
                             </tr>
@@ -71,7 +71,7 @@
                                 <td>
                                     15
                                 </td>
-                                <td class="py-0">
+                                <td>
                                     <a href="" class="btn btn-primary btn-sm">Tambahkan ke list</a>
                                 </td>
                             </tr>
@@ -139,10 +139,11 @@
                                 <td>
                                     <input type="number" name="updateStok" id="updateStok">
                                 </td>
-                                <td class="py-0">
+                                <td>
                                     <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded btn-icon">
                                         <i class="mdi mdi-trash-can text-danger"></i>
                                     </button>
+                                </td>
                             </tr>
                             <tr>
                                 <td>
@@ -160,10 +161,11 @@
                                 <td>
                                     <input type="number" name="updateStok" id="updateStok">
                                 </td>
-                                <td class="py-0">
+                                <td>
                                     <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded btn-icon">
                                         <i class="mdi mdi-trash-can text-danger"></i>
                                     </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

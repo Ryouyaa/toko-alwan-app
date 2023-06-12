@@ -27,8 +27,6 @@ Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // BARANG
 Route::get('/daftar-barang', [BarangController::class, 'index']);
-Route::get('/barang-masuk', [BarangController::class, 'tambahView']);
-Route::get('/barang-keluar', [BarangController::class, 'keluarView']);
 
 Route::get('/tambah-barang', function () {
     return view('barang.tambah-barang');
@@ -48,6 +46,10 @@ Route::get('/daftar-hilang', function () {
 
 // ADMIN
 Route::group(['middleware' => 'auth'], function () {
+    
+    Route::get('/barang-masuk', [BarangController::class, 'tambahView']);
+    Route::get('/barang-keluar', [BarangController::class, 'keluarView']);
+
     Route::get('/profil', [AdminController::class, 'index']);
     Route::get('/ubah-sandi', [AdminController::class, 'sandi']);
     Route::post('/ubah-sandi', [AdminController::class, 'ubahSandi']);
