@@ -12,4 +12,9 @@ class Barang extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function lost()
+    {
+        return $this->hasMany(Lost::class);
+    }
 }

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('losts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('barang_id');
+            $table->foreign('barang_id')->references('id')->on('barangs'); // foreign key
+            $table->integer('jumlah_stok');
+            $table->text('detail');
             $table->timestamps();
         });
     }
