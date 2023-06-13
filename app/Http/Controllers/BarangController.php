@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 
 use App\Models\Barang;
 use App\Http\Requests\StoreBarangRequest;
@@ -75,7 +73,7 @@ class BarangController extends Controller
     public function edit(Barang $barang)
     {
         return view('barang.form-ubah', [
-            'barangs' => $barang
+            'barang' => $barang
         ]);
     }
 
@@ -84,7 +82,22 @@ class BarangController extends Controller
      */
     public function update(UpdateBarangRequest $request, Barang $barang)
     {
-        //
+        $this->authorize('update', $barang);
+        // Validasi input
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'jumlah_stok' => 'required|integer',
+            'stok_minimum' => 'required|integer',
+            'harga_beli' => 'required|integer',
+            'harga_jual' => 'required|integer',
+            'satuan_barang' => 'required',
+        ]);
+
+        // Simpan data ke database
+        $barang->update($validatedData);
+
+        // Redirect atau kembalikan response yang sesuai
+        return redirect('/daftar-barang')->with('success', 'Data berhasil disimpan');
     }
 
     /**

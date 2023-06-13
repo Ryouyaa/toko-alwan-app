@@ -14,7 +14,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                    <form class="forms-sample" method="post" action="/daftar-barang">
+                    <form class="forms-sample" method="post" action="/barang">
                         @csrf
                         <div class="form-group">
                             <label for="name">Nama</label>
