@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+
 use App\Models\Barang;
 use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
@@ -72,8 +75,15 @@ class BarangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Barang $barang)
+    public function destroy($id)
     {
-        //
+        // Find the data based on the ID
+        $data = Barang::findOrFail($id);
+
+        // Delete the data from the database
+        $data->delete();
+
+        // Redirect or return an appropriate response
+        return redirect('/daftar-barang')->with('success', 'Data berhasil dihapus');
     }
 }

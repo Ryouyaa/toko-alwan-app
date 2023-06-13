@@ -28,25 +28,18 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // BARANG
-Route::get('/daftar-barang', [BarangController::class, 'index']);
+Route::resource('/daftar-barang', BarangController::class)->middleware('auth');
+Route::delete('/daftar-barang/{id}', [YourController::class, 'destroy']);
+
+// Route::resource('daftar-barang', 'BarangController');
 
 // BARANG HILANG
 Route::get('/daftar-hilang', [LostController::class, 'index']);
-
-// Route::get('/daftar-hilang', function ()
-// {
-//     return view('barang.hilang.daftar', [
-//         "losts" => Lost::all()
-//     ]);
-// });
+Route::get('/barang-hilang', [LostController::class, 'cari']);
 
 
 Route::get('/tambah-barang', function () {
     return view('barang.tambah-barang');
-});
-
-Route::get('/barang-hilang', function () {
-    return view('barang.hilang.cari');
 });
 
 Route::get('/form-barang-hilang', function () {

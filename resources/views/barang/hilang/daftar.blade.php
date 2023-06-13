@@ -41,7 +41,7 @@
                                 <td>
                                     {{ $lost->jumlah_stok }}
                                 </td>
-                                <td>
+                                <td style="width: 110px; word-wrap: break-word;">
                                     {{ $lost->detail }}
                                 </td>
                                 <td>

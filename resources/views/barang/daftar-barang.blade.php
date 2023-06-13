@@ -46,7 +46,11 @@
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-warning btn-sm">Ubah</a>
-                                    <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                    <form action="/daftar-barang/{{ $barang->id }}" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin?')">Hapus</button>
+                                    </form>                                    
                                 </td>
                             </tr>
                             @endforeach

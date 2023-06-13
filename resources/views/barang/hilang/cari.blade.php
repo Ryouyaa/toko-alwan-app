@@ -41,42 +41,30 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($barangs as $barang)
                             <tr>
                                 <td>
-                                    1
+                                    {{ $barang->id }}
                                 </td>
                                 <td>
-                                    Spidol Hitam Permanent
+                                    {{ $barang->name }}
                                 </td>
                                 <td>
-                                    33
+                                    {{ $barang->jumlah_stok }}
                                 </td>
                                 <td>
-                                    15
+                                    {{ $barang->stok_minimum }}
                                 </td>
                                 <td>
                                     <a href="/form-barang-hilang" class="btn btn-primary btn-sm">Pilih</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Spidol Hitam Permanent
-                                </td>
-                                <td>
-                                    33
-                                </td>
-                                <td>
-                                    15
-                                </td>
-                                <td>
-                                    <a href="/form-barang-hilang" class="btn btn-primary btn-sm">Pilih</a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-3">
+                    {{ $barangs->links() }}
                 </div>
             </div>
         </div>

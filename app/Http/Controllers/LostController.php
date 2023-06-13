@@ -18,6 +18,13 @@ class LostController extends Controller
         return view('barang.hilang.daftar', compact('losts'));
     }
 
+    public function cari()
+    {
+        return view('barang.hilang.cari', [
+            "barangs" => DB::table('barangs')->paginate(15)
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
