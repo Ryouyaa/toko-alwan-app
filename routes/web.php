@@ -44,7 +44,7 @@ Route::get('/form-barang-hilang', function () {
 Route::group(['middleware' => 'auth'], function () {
 
     // BARANG
-    Route::resource('/daftar-barang', BarangController::class);
+    Route::resource('/daftar-barang', BarangController::class)->middleware('auth');
     
     // UPDATE BARANG
     Route::get('/barang-masuk', [BarangController::class, 'tambahView']);

@@ -45,7 +45,21 @@ class BarangController extends Controller
      */
     public function store(StoreBarangRequest $request)
     {
-        //
+        // Validasi input
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'jumlah_stok' => 'required|integer',
+            'stok_minimum' => 'required|integer',
+            'harga_beli' => 'required|integer',
+            'harga_jual' => 'required|integer',
+            'satuan_barang' => 'required',
+        ]);
+
+        // Simpan data ke database
+        Barang::create($validatedData);
+
+        // Redirect atau kembalikan response yang sesuai
+        return redirect('/daftar-barang')->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -53,7 +67,6 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        
     }
 
     /**
