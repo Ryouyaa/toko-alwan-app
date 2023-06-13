@@ -51,7 +51,7 @@
                                     {{ $barang->stok_minimum }}
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-warning btn-sm">Ubah</a>
+                                    <a href="/daftar-barang/{{ $barang->id }}/edit" class="btn btn-warning btn-sm">Ubah</a>
                                     <form action="/daftar-barang/{{ $barang->id }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf

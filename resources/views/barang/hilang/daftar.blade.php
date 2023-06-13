@@ -36,7 +36,7 @@
                                     {{ $losts->firstItem() + $loop->index }}
                                 </td>
                                 <td>
-                                    {{ $lost->barang->name }}
+                                    {{ $lost->barang?->name }}
                                 </td>
                                 <td>
                                     {{ $lost->jumlah_stok }}

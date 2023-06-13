@@ -15,7 +15,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/tambah-barang">
+      <a class="nav-link" href="/barang/create">
         <i class="menu-icon mdi mdi-view-grid-plus"></i>
         <span class="menu-title">Tambah Barang</span>
       </a>

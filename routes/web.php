@@ -27,17 +27,11 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
-// BARANG
-Route::resource('/daftar-barang', BarangController::class)->middleware('auth');
-Route::delete('/daftar-barang/{id}', [YourController::class, 'destroy']);
-
-// Route::resource('daftar-barang', 'BarangController');
-
 // BARANG HILANG
 Route::get('/daftar-hilang', [LostController::class, 'index']);
 Route::get('/barang-hilang', [LostController::class, 'cari']);
 
-
+// NEED FIX CONTROLLER
 Route::get('/tambah-barang', function () {
     return view('barang.tambah-barang');
 });
@@ -46,12 +40,18 @@ Route::get('/form-barang-hilang', function () {
     return view('barang.hilang.form');
 });
 
-// ADMIN
+// AUTH
 Route::group(['middleware' => 'auth'], function () {
+
+    // BARANG
+    Route::resource('/daftar-barang', BarangController::class);
     
+    // UPDATE BARANG
     Route::get('/barang-masuk', [BarangController::class, 'tambahView']);
     Route::get('/barang-keluar', [BarangController::class, 'keluarView']);
+    Route::resource('/barang', BarangController::class);
 
+    // ADMIN
     Route::get('/profil', [AdminController::class, 'index']);
     Route::get('/ubah-sandi', [AdminController::class, 'sandi']);
     Route::post('/ubah-sandi', [AdminController::class, 'ubahSandi']);

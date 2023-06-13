@@ -37,7 +37,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        //
+        return view('barang.tambah-barang');
     }
 
     /**
@@ -53,7 +53,7 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        //
+        
     }
 
     /**
@@ -61,7 +61,9 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        //
+        return view('barang.form-ubah', [
+            'barangs' => $barang
+        ]);
     }
 
     /**

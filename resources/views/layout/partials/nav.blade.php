@@ -8,10 +8,10 @@
     </div>
     <div>
       <a class="navbar-brand brand-logo" href="/">
-        <img src="images/logo.png" alt="logo" />
+        <img src="/images/logo.png" alt="logo" />
       </a>
       <a class="navbar-brand brand-logo-mini" href="/">
-        <img src="images/favicon.png" alt="logo" />
+        <img src="/images/favicon.png" alt="logo" />
       </a>
     </div>
   </div>
@@ -23,10 +23,10 @@
       <p class="mb-0">{{ auth()->user()->name }}</p>
       <li class="nav-item dropdown d-none d-lg-block user-dropdown">
         <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-          <img class="img-xs rounded-circle" src="images/faces/anon.jpg" alt="Profile image"> </a>
+          <img class="img-xs rounded-circle" src="/images/faces/anon.jpg" alt="Profile image"> </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
           <div class="dropdown-header text-center">
-            <img class="img-xs rounded-circle" src="images/faces/anon.jpg" alt="Profile image">
+            <img class="img-xs rounded-circle" src="/images/faces/anon.jpg" alt="Profile image">
             <p class="mb-1 mt-3 font-weight-semibold">{{ auth()->user()->name }}</p>
             <p class="fw-light text-muted mb-0">{{ auth()->user()->nomor_hp }}</p>
           </div>
