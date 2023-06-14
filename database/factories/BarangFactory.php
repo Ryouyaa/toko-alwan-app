@@ -22,6 +22,7 @@ class BarangFactory extends Factory
             'stok_minimum' => fake()->numberBetween(0, 50),
             'harga_beli' => fake()->numberBetween(5000, 20000),
             'harga_jual' => fake()->numberBetween(20000, 50000),
+            'satuan_barang' => fake()->randomElement(['pcs', 'lusin', 'kodi', 'gross', 'rim']),
         ];
     }
 }
