@@ -82,6 +82,7 @@ class BarangController extends Controller
      */
     public function update(UpdateBarangRequest $request, Barang $barang)
     {
+        dd($request);
         $this->authorize('update', $barang);
         // Validasi input
         $validatedData = $request->validate([
