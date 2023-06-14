@@ -28,17 +28,10 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // BARANG HILANG
+Route::resource('/hilang', LostController::class);
 Route::get('/daftar-hilang', [LostController::class, 'index']);
 Route::get('/barang-hilang', [LostController::class, 'cari']);
-
-// NEED FIX CONTROLLER
-Route::get('/tambah-barang', function () {
-    return view('barang.tambah-barang');
-});
-
-Route::get('/form-barang-hilang', function () {
-    return view('barang.hilang.form');
-});
+Route::get('/barang-hilang/form/{barang:id}', [LostController::class, 'create']);
 
 // AUTH
 Route::group(['middleware' => 'auth'], function () {
@@ -46,7 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     // BARANG
     Route::get('/daftar-barang', [BarangController::class, 'index']);
     Route::resource('/barang', BarangController::class);
-    
+
     // UPDATE BARANG
     Route::get('/barang-masuk', [BarangController::class, 'tambahView']);
     Route::get('/barang-keluar', [BarangController::class, 'keluarView']);

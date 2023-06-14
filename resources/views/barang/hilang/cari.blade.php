@@ -29,10 +29,10 @@
                                 <th>
                                     Nama Barang
                                 </th>
-                                <th>
+                                <th class="d-none d-sm-table-cell">
                                     Stok Barang
                                 </th>
-                                <th>
+                                <th class="d-none d-sm-table-cell">
                                     Stok Minimum
                                 </th>
                                 <th>
@@ -49,14 +49,14 @@
                                 <td>
                                     {{ $barang->name }}
                                 </td>
-                                <td>
+                                <td class="d-none d-sm-table-cell">
                                     {{ $barang->jumlah_stok }}
                                 </td>
-                                <td>
+                                <td class="d-none d-sm-table-cell">
                                     {{ $barang->stok_minimum }}
                                 </td>
                                 <td>
-                                    <a href="/form-barang-hilang" class="btn btn-primary btn-sm">Pilih</a>
+                                    <a href="/barang-hilang/form/{{ $barang->id }}" class="btn btn-primary btn-sm">Pilih</a>
                                 </td>
                             </tr>
                             @endforeach

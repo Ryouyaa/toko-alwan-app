@@ -8,6 +8,12 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Tabel Barang</h4>
+                @if (session()->has('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -30,7 +36,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($losts as $lost)    
+                            @foreach ($losts as $lost)
                             <tr>
                                 <td>
                                     {{ $losts->firstItem() + $loop->index }}
@@ -41,12 +47,17 @@
                                 <td>
                                     {{ $lost->jumlah_stok }}
                                 </td>
-                                <td style="width: 110px; word-wrap: break-word;">
+                                <td>
                                     {{ $lost->detail }}
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-warning btn-sm">Ubah</a>
-                                    <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                    <form action="/hilang/{{ $lost->id }}" method="post" class="d-inline">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Anda Yakin?')">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
