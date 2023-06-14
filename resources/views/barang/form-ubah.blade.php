@@ -75,13 +75,8 @@
                         <div class="form-group">
                             <label for="satuan_barang" class="form-label">Satuan Barang</label>
                             <select name="satuan_barang" id="satuan_barang" class="form-select" disabled>
-                                <option selected value="{{ $barang->satuan_barang }}">Pilih satuan barang</option>
-                                <option value="1">pcs</option>
-                                <option value="12">lusin</option>
-                                <option value="20">kodi</option>
-                                <option value="144">gross</option>
-                                <option value="500">rim</option>
-                            </select>
+                                <option value="{{ $barang->satuan_barang }}" selected>{{ $barang->satuan_barang }}</option>
+                            </select>                  
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>
