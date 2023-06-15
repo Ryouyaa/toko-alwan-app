@@ -18,8 +18,8 @@ class Penjualan extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function detail_penjualan()
+    public function detailPenjualan()
     {
-        return $this->hasMany(detail_penjualan::class);
+        return $this->hasMany(DetailPenjualan::class);
     }
 }

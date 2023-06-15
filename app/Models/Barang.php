@@ -18,8 +18,8 @@ class Barang extends Model
         return $this->hasMany(Lost::class);
     }
 
-    public function pesanan_detail() 
+    public function detailPenjualan() 
 	{
-	     return $this->hasMany(detail_penjualan::class);
+	     return $this->hasMany(DetailPenjualan::class);
 	}
 }
