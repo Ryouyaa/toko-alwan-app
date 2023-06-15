@@ -23,7 +23,6 @@ class BarangFactory extends Factory
             'harga_beli' => fake()->numberBetween(5000, 20000),
             'harga_jual' => fake()->numberBetween(20000, 50000),
             'harga_grosir' => fake()->numberBetween(50000, 200000),
-            'jumlah_grosir' => fake()->numberBetween(10, 200),
         ];
     }
 }

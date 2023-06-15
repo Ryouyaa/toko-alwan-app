@@ -20,8 +20,8 @@
                         @csrf
                         <div class="form-group">
                             <label for="name">Nama</label>
-                            <input name="name" type="text"
-                                class="form-control @error('name') is-invalid  @enderror" id="name" placeholder="Nama" value="{{ $barang->name }}">
+                            <input name="name" type="text" class="form-control @error('name') is-invalid  @enderror"
+                                id="name" placeholder="Nama" value="{{ $barang->name }}">
                             @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -73,10 +73,22 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="harga_grosir">Harga Jual (Grosir / per Pack)</label>
+                            <input name="harga_grosir" type="number"
+                                class="form-control @error('harga_grosir') is-invalid  @enderror" id="harga_grosir"
+                                placeholder="Harga Jual" value="{{ $barang->harga_grosir }}">
+                            @error('harga_grosir')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="satuan_barang" class="form-label">Satuan Barang</label>
                             <select name="satuan_barang" id="satuan_barang" class="form-select" disabled>
-                                <option value="{{ $barang->satuan_barang }}" selected>{{ $barang->satuan_barang }}</option>
-                            </select>                  
+                                <option value="{{ $barang->satuan_barang }}" selected>{{ $barang->satuan_barang }}
+                                </option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>
