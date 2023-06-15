@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 use App\Models\Lost;
 use App\Models\Barang;
-use App\Http\Requests;
-use App\Http\Requests\StoreLostRequest;
-use App\Http\Requests\UpdateLostRequest;
+use App\Http\Requests\LostRequest;
 
 class LostController extends Controller
 {
@@ -17,9 +15,10 @@ class LostController extends Controller
      */
     public function index()
     {
-        $losts = Lost::with('barang')->paginate(15);
+        $losts = Lost::with('barang')->latest('created_at')->paginate(15);
         return view('barang.hilang.daftar', compact('losts'));
     }
+
 
     public function cari()
     {
@@ -33,7 +32,7 @@ class LostController extends Controller
      */
     public function create(Barang $barang)
     {
-        return view('barang.hilang.form', [
+        return view('barang.hilang.form-tambah', [
             "barang" => $barang
         ]);
     }
@@ -41,17 +40,10 @@ class LostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LostRequest $request)
     {
-        // Validasi input
-        $validatedData = $request->validate([
-            'barang_id' => 'required|exists:barangs,id',
-            'jumlah_stok' => 'required|integer',
-            'detail' => 'required|string|max:80',
-        ]);
-
         // Simpan data ke database
-        Lost::create($validatedData);
+        Lost::create($request->validated());
 
         // Redirect atau kembalikan response yang sesuai
         return redirect('/daftar-hilang')->with('success', 'Data berhasil disimpan');
@@ -71,15 +63,23 @@ class LostController extends Controller
      */
     public function edit(Lost $lost)
     {
-        //
+        return view('barang.hilang.form-ubah', [
+            'lost' => $lost
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLostRequest $request, Lost $lost)
+    public function update(LostRequest $request, Lost $lost)
     {
-        //
+        $this->authorize('update', $lost);
+
+        // Simpan data ke database
+        $lost->update($request->validated());
+
+        // Redirect atau kembalikan response yang sesuai
+        return redirect('/daftar-hilang')->with('success', 'Data berhasil disimpan');
     }
 
     /**

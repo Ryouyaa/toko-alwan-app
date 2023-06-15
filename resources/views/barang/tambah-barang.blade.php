@@ -82,7 +82,7 @@
                             </div>
                             @enderror
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="satuan_barang" class="form-label">Satuan Barang</label>
                             <select name="satuan_barang" id="satuan_barang" class="form-select"  disabled>
                                 <option selected>Pilih satuan barang</option>
@@ -92,7 +92,7 @@
                                 <option value="144">gross</option>
                                 <option value="500">rim</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>
                     </form>

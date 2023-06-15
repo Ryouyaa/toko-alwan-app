@@ -19,15 +19,30 @@
                         <input type="hidden" name="barang_id" value="{{ $barang->id }}">
                         <div class="form-group">
                             <label for="namaBarang">Nama</label>
-                            <input readonly type="text" class="form-control" id="namaBarang" placeholder="Nama" value="{{ $barang->name }}" />
+                            <input readonly type="text" class="form-control @error('namaBarang') is-invalid  @enderror" id="namaBarang" placeholder="Nama" value="{{ $barang->name }}">
+                            @error('namaBarang')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="jumlahStok">Jumlah Stok</label>
-                            <input type="number" class="form-control" id="jumlahStok" name="jumlah_stok" placeholder="Jumlah Stok" />
+                            <input type="number" class="form-control @error('jumlah_stok') is-invalid  @enderror" id="jumlahStok" name="jumlah_stok" placeholder="Jumlah Stok">
+                            @error('jumlah_stok')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="detail">Detail</label>
-                            <textarea class="form-control" name="detail" id="detail" cols="30" rows="7" style="height: unset;" placeholder="Maksimal 80 karakter"></textarea>
+                            <textarea class="form-control @error('detail') is-invalid  @enderror" name="detail" id="detail" cols="30" rows="7" style="height: unset;" placeholder="Maksimal 80 karakter"></textarea>
+                            @error('detail')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>

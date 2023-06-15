@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\detail_penjualan;
+use App\Models\DetailPenjualan;
 use App\Http\Requests\Storedetail_penjualanRequest;
 use App\Http\Requests\Updatedetail_penjualanRequest;
 
@@ -35,7 +35,7 @@ class DetailPenjualanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(detail_penjualan $detail_penjualan)
+    public function show(DetailPenjualan $detail_penjualan)
     {
         //
     }
@@ -43,7 +43,7 @@ class DetailPenjualanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(detail_penjualan $detail_penjualan)
+    public function edit(DetailPenjualan $detail_penjualan)
     {
         //
     }
@@ -51,7 +51,7 @@ class DetailPenjualanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updatedetail_penjualanRequest $request, detail_penjualan $detail_penjualan)
+    public function update(Updatedetail_penjualanRequest $request, DetailPenjualan $detail_penjualan)
     {
         //
     }
@@ -59,7 +59,7 @@ class DetailPenjualanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(detail_penjualan $detail_penjualan)
+    public function destroy(DetailPenjualan $detail_penjualan)
     {
         //
     }

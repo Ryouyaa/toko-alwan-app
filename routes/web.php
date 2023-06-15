@@ -5,7 +5,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LostController;
-use App\Models\Lost;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +27,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // BARANG HILANG
+Route::get('/hilang/{lost:id}/edit', [LostController::class, 'edit']);
 Route::resource('/hilang', LostController::class);
 Route::get('/daftar-hilang', [LostController::class, 'index']);
 Route::get('/barang-hilang', [LostController::class, 'cari']);

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBarangRequest extends FormRequest
+class LostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,9 @@ class StoreBarangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'barang_id' => 'required|exists:barangs,id',
+            'jumlah_stok' => 'required|integer',
+            'detail' => 'required|string|max:80',
         ];
     }
 }

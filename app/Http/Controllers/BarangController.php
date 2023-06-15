@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Barang;
-use App\Http\Requests\StoreBarangRequest;
-use App\Http\Requests\UpdateBarangRequest;
+use App\Http\Requests\BarangRequest;
 
 class BarangController extends Controller
 {
@@ -41,20 +40,10 @@ class BarangController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBarangRequest $request)
+    public function store(BarangRequest $request)
     {
-        // Validasi input
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'jumlah_stok' => 'required|integer',
-            'stok_minimum' => 'required|integer',
-            'harga_beli' => 'required|integer',
-            'harga_jual' => 'required|integer',
-            'satuan_barang' => 'required',
-        ]);
-
         // Simpan data ke database
-        Barang::create($validatedData);
+        Barang::create($request->validated());
 
         // Redirect atau kembalikan response yang sesuai
         return redirect('/daftar-barang')->with('success', 'Data berhasil disimpan');
@@ -80,22 +69,12 @@ class BarangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateBarangRequest $request, Barang $barang)
+    public function update(BarangRequest $request, Barang $barang)
     {
-        // dd($request);
         $this->authorize('update', $barang);
-        // Validasi input
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'jumlah_stok' => 'required|integer',
-            'stok_minimum' => 'required|integer',
-            'harga_beli' => 'required|integer',
-            'harga_jual' => 'required|integer',
-            'satuan_barang' => 'required',
-        ]);
 
         // Simpan data ke database
-        $barang->update($validatedData);
+        $barang->update($request->validated());
 
         // Redirect atau kembalikan response yang sesuai
         return redirect('/daftar-barang')->with('success', 'Data berhasil disimpan');

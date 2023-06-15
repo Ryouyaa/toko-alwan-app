@@ -51,7 +51,7 @@
                                     {{ $lost->detail }}
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-warning btn-sm">Ubah</a>
+                                    <a href="/hilang/{{ $lost->id }}/edit" class="btn btn-warning btn-sm">Ubah</a>
                                     <form action="/hilang/{{ $lost->id }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
