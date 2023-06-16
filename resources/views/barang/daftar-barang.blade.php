@@ -57,9 +57,9 @@
                                     Rp {{ number_format($barang->harga_jual, 0, ',', '.') }}
                                 </td>
                                 <td>
-                                    <a href="/barang/{{ $barang->id }}/edit"
+                                    <a href="/barangs/{{ $barang->id }}/edit"
                                         class="btn btn-warning btn-sm">Ubah</a>
-                                    <form action="/barang/{{ $barang->id }}" method="post" class="d-inline">
+                                    <form action="/barangs/{{ $barang->id }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button type="submit" class="btn btn-danger btn-sm"

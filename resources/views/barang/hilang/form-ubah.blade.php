@@ -14,7 +14,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                    <form class="forms-sample" method="POST" action="/hilang/{{ $lost->id }}">
+                    <form class="forms-sample" method="POST" action="/losts/{{ $lost->id }}">
                         @method('put')
                         @csrf
                         <input type="hidden" name="barang_id" value="{{ $lost->barang->id }}">

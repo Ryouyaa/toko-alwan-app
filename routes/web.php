@@ -24,21 +24,24 @@ Route::get('/', function () {
 // LOGIN
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');
 
 // BARANG HILANG
-Route::get('/hilang/{lost:id}/edit', [LostController::class, 'edit']);
-Route::resource('/hilang', LostController::class);
 Route::get('/daftar-hilang', [LostController::class, 'index']);
-Route::get('/barang-hilang', [LostController::class, 'cari']);
-Route::get('/barang-hilang/form/{barang:id}', [LostController::class, 'create']);
 
 // AUTH
 Route::group(['middleware' => 'auth'], function () {
 
+    // LOGIN
+    Route::post('/logout', [LoginController::class, 'logout']);
+
     // BARANG
     Route::get('/daftar-barang', [BarangController::class, 'index']);
-    Route::resource('/barang', BarangController::class);
+    Route::resource('barangs', BarangController::class);
+
+    // BARANG HILANG
+    Route::resource('losts', LostController::class);
+    Route::get('/barang-hilang', [LostController::class, 'cari']);
+    Route::get('/barang-hilang/form/{barang:id}', [LostController::class, 'create']);
 
     // UPDATE BARANG
     Route::get('/barang-masuk', [BarangController::class, 'tambahView']);

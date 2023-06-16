@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use App\Policies\BarangPolicy;
 use App\Models\Barang;
+use App\Policies\LostPolicy;
+use App\Models\Lost;
 
 
 // use Illuminate\Support\Facades\Gate;
@@ -29,5 +31,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::policy(Barang::class, BarangPolicy::class);
+        Gate::policy(Lost::class, LostPolicy::class);
     }
 }

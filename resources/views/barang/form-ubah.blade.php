@@ -15,7 +15,7 @@
                     </div>
                     @endif
 
-                    <form class="forms-sample" method="post" action="/barang/{{ $barang->id }}">
+                    <form class="forms-sample" method="post" action="/barangs/{{ $barang->id }}">
                         @method('put')
                         @csrf
                         <div class="form-group">

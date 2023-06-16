@@ -75,8 +75,11 @@ class LostController extends Controller
     {
         $this->authorize('update', $lost);
 
+        // Validasi input dan dapatkan data yang telah lolos validasi
+        $validatedData = $request->validated();
+
         // Simpan data ke database
-        $lost->update($request->validated());
+        $lost->update($validatedData);
 
         // Redirect atau kembalikan response yang sesuai
         return redirect('/daftar-hilang')->with('success', 'Data berhasil disimpan');
