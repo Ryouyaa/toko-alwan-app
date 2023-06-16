@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 use App\Models\Barang;
 use App\Http\Requests\BarangRequest;
@@ -12,12 +12,26 @@ class BarangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('barang.daftar-barang', [
-            "barangs" => DB::table('barangs')->paginate(15)
-        ]);
+        $search = $request->input('search');
+
+        $barangs = Barang::query();
+
+        if ($search) {
+            $barangs->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('id', $search);
+            });
+        }
+
+        $barangs = $barangs->paginate(15);
+
+        $barangs->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
+
+        return view('barang.daftar-barang', compact('barangs'));
     }
+
 
     public function tambahView()
     {

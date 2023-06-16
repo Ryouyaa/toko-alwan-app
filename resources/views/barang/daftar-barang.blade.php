@@ -4,6 +4,16 @@
 
 <div class="content-wrapper">
     <h2 class="welcome-text mb-3">Daftar Barang</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6 mb-3">
+            <form class="search-form input-group rounded" action="/barang-hilang">
+                <input name="search" type="search" class="form-control" placeholder="Search Here" title="Search here">
+                <button style="height: 2rem" class="btn btn-outline-secondary justify-content-center py-0" type="submit" id="button-addon2" class="p-0">
+                    <i class="icon-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -20,6 +30,9 @@
                             <tr>
                                 <th>
                                     No
+                                </th>
+                                <th>
+                                    ID
                                 </th>
                                 <th>
                                     Nama Barang
@@ -45,6 +58,9 @@
                                     {{ $barangs->firstItem() + $loop->index }}
                                 </td>
                                 <td>
+                                    {{ $barang->id }}
+                                </td>
+                                <td>
                                     {{ $barang->name }}
                                 </td>
                                 <td>
@@ -57,8 +73,7 @@
                                     Rp {{ number_format($barang->harga_jual, 0, ',', '.') }}
                                 </td>
                                 <td>
-                                    <a href="/barangs/{{ $barang->id }}/edit"
-                                        class="btn btn-warning btn-sm">Ubah</a>
+                                    <a href="/barangs/{{ $barang->id }}/edit" class="btn btn-warning btn-sm">Ubah</a>
                                     <form action="/barangs/{{ $barang->id }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf

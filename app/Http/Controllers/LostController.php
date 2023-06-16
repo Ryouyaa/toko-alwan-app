@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 use App\Models\Lost;
 use App\Models\Barang;
@@ -13,18 +14,43 @@ class LostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $losts = Lost::with('barang')->latest('created_at')->paginate(15);
-        return view('barang.hilang.daftar', compact('losts'));
-    }
+    public function index(Request $request)
+{
+    $search = $request->input('search');
+
+    $losts = Lost::with('barang')
+        ->when($search, function ($query) use ($search) {
+            return $query->whereHas('barang', function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%");
+            });
+        })
+        ->latest('created_at')
+        ->paginate(15);
+
+    $losts->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
+
+    return view('barang.hilang.daftar', compact('losts'));
+}
 
 
-    public function cari()
+    public function cari(Request $request)
     {
-        return view('barang.hilang.cari', [
-            "barangs" => DB::table('barangs')->paginate(15)
-        ]);
+        $search = $request->input('search');
+
+        $barangs = Barang::query();
+
+        if ($search) {
+            $barangs->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('id', $search);
+            });
+        }
+
+        $barangs = $barangs->paginate(15);
+
+        $barangs->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
+
+        return view('barang.hilang.cari', compact('barangs'));
     }
 
     /**
