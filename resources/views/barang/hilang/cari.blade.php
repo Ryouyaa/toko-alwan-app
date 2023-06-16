@@ -7,7 +7,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6 mb-3">
-            <form class="search-form input-group rounded" action="/daftar-barang">
+            <form class="search-form input-group rounded" action="/barang-hilang">
                 <input name="search" type="search" class="form-control" placeholder="Search Here" title="Search here">
                 <button style="height: 2rem" class="btn btn-outline-secondary justify-content-center py-0" type="submit" id="button-addon2" class="p-0">
                     <i class="icon-search"></i>

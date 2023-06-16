@@ -7,10 +7,12 @@
 
     <div class="row justify-content-center">
         <div class="col-md-6 mb-3">
-            <form class="search-form input-group rounded" action="#">
-                <input type="search" class="form-control" placeholder="Search Here" title="Search here">
-                <button style="height: 2rem" class="btn btn-outline-secondary justify-content-center py-0" type="button"
-                    id="button-addon2" class="p-0"><i class="icon-search"></i></button>
+            <form class="search-form input-group rounded" action="/barang-masuk">
+                <input name="search" type="search" class="form-control" placeholder="Search Here" title="Search here">
+                <button style="height: 2rem" class="btn btn-outline-secondary justify-content-center py-0" type="submit"
+                    id="button-addon2" class="p-0">
+                    <i class="icon-search"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -19,6 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Tabel Hasil Pencarian</h4>
+                @if ($search && $barangs->isNotEmpty())
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -41,43 +44,36 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($barangs as $barang)
                             <tr>
                                 <td>
-                                    1
+                                    {{ $barang->id }}
                                 </td>
                                 <td>
-                                    Spidol Hitam Permanent
+                                    {{ $barang->name }}
                                 </td>
                                 <td>
-                                    33
+                                    {{ $barang->jumlah_stok }}
                                 </td>
                                 <td>
-                                    15
+                                    {{ $barang->stok_minimum }}
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-primary btn-sm">Tambahkan ke list</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Spidol Hitam Permanent
-                                </td>
-                                <td>
-                                    33
-                                </td>
-                                <td>
-                                    15
-                                </td>
-                                <td>
-                                    <a href="" class="btn btn-primary btn-sm">Tambahkan ke list</a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
+                <div class="mt-3">
+                    {{ $barangs->links() }}
+                </div>
+                @elseif (!$search)
+                <p>Silakan lakukan pencarian.</p>
+                @else
+                <p>Tidak ada hasil pencarian.</p>
+                @endif
             </div>
         </div>
     </div>
@@ -123,27 +119,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Spidol Hitam Permanent
-                                </td>
-                                <td>
-                                    33
-                                </td>
-                                <td>
-                                    15
-                                </td>
-                                <td>
-                                    <input type="number" name="updateStok" id="updateStok">
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded btn-icon">
-                                        <i class="mdi mdi-trash-can text-danger"></i>
-                                    </button>
-                            </tr>
                             <tr>
                                 <td>
                                     1

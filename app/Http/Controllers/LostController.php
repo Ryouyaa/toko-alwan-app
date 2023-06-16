@@ -15,22 +15,22 @@ class LostController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-{
-    $search = $request->input('search');
+    {
+        $search = $request->input('search');
 
-    $losts = Lost::with('barang')
-        ->when($search, function ($query) use ($search) {
-            return $query->whereHas('barang', function ($query) use ($search) {
-                $query->where('name', 'LIKE', "%{$search}%");
-            });
-        })
-        ->latest('created_at')
-        ->paginate(15);
+        $losts = Lost::with('barang')
+            ->when($search, function ($query) use ($search) {
+                return $query->whereHas('barang', function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%{$search}%");
+                });
+            })
+            ->latest('created_at')
+            ->paginate(15);
 
-    $losts->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
+        $losts->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
 
-    return view('barang.hilang.daftar', compact('losts'));
-}
+        return view('barang.hilang.daftar', compact('losts'));
+    }
 
 
     public function cari(Request $request)
@@ -68,12 +68,19 @@ class LostController extends Controller
      */
     public function store(LostRequest $request)
     {
+        $validatedData = $request->validated();
+
+        // Mengurangi jumlah stok pada tabel barang
+        $barang = Barang::findOrFail($validatedData['barang_id']);
+        $barang->decrement('jumlah_stok', $validatedData['jumlah_stok']);
+
         // Simpan data ke database
-        Lost::create($request->validated());
+        Lost::create($validatedData);
 
         // Redirect atau kembalikan response yang sesuai
         return redirect('/daftar-hilang')->with('success', 'Data berhasil disimpan');
     }
+
 
 
     /**
@@ -117,6 +124,10 @@ class LostController extends Controller
     public function destroy($id)
     {
         $data = Lost::findOrFail($id);
+
+        // Menambah jumlah stok pada tabel barang
+        $barang = Barang::findOrFail($data->barang_id);
+        $barang->increment('jumlah_stok', $data->jumlah_stok);
 
         // Delete the data from the database
         $data->delete();

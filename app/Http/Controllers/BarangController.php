@@ -33,10 +33,26 @@ class BarangController extends Controller
     }
 
 
-    public function tambahView()
+    public function tambahView(Request $request)
     {
-        return view('barang.barang-masuk');
+        $search = $request->input('search');
+
+        $barangs = Barang::query();
+
+        if ($search) {
+            $barangs->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('id', $search);
+            });
+        }
+
+        $barangs = $barangs->paginate(5);
+
+        $barangs->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
+
+        return view('barang.barang-masuk', compact('barangs', 'search'));
     }
+
 
     public function keluarView()
     {
