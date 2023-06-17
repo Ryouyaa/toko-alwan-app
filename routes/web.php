@@ -45,6 +45,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     // UPDATE BARANG
     Route::get('/barang-masuk', [BarangController::class, 'tambahView']);
+    Route::post('/tambah-barang', [BarangController::class, 'tambahBarang']);
+    Route::post('/delete-barang', [BarangController::class, 'deleteBarang']);
+
     Route::get('/barang-keluar', [BarangController::class, 'keluarView']);
 
     // ADMIN

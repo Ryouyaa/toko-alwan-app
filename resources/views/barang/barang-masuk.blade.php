@@ -32,10 +32,10 @@
                                 <th>
                                     Nama Barang
                                 </th>
-                                <th>
+                                <th class="d-none d-sm-table-cell">
                                     Stok Barang
                                 </th>
-                                <th>
+                                <th class="d-none d-sm-table-cell">
                                     Stok Minimum
                                 </th>
                                 <th>
@@ -52,14 +52,15 @@
                                 <td>
                                     {{ $barang->name }}
                                 </td>
-                                <td>
+                                <td class="d-none d-sm-table-cell">
                                     {{ $barang->jumlah_stok }}
                                 </td>
-                                <td>
+                                <td class="d-none d-sm-table-cell">
                                     {{ $barang->stok_minimum }}
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-primary btn-sm">Tambahkan ke list</a>
+                                    <a class="btn btn-primary btn-sm" data-barang-id="{{ $barang->id }}"
+                                        onclick="addToSelectedList({{ $barang->id }})">Tambahkan ke list</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -94,73 +95,43 @@
             <div class="card-body">
                 <h4 class="card-title mb-0">Tabel Barang</h4>
                 <code>*List barang yang ingin diupdate</code>
+                @if (!empty($selectedItems))
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>
-                                    ID
-                                </th>
-                                <th>
-                                    Nama Barang
-                                </th>
-                                <th>
-                                    Stok Barang
-                                </th>
-                                <th>
-                                    Stok Minimum
-                                </th>
-                                <th>
-                                    Update Jumlah Stok
-                                </th>
-                                <th>
-                                    Aksi
-                                </th>
+                                <th>ID</th>
+                                <th>Nama Barang</th>
+                                <th class="d-none d-sm-table-cell">Stok Barang</th>
+                                <th class="d-none d-sm-table-cell">Stok Minimum</th>
+                                <th>Update Jumlah Stok</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Spidol Hitam Permanent
-                                </td>
-                                <td>
-                                    33
-                                </td>
-                                <td>
-                                    15
-                                </td>
+                            @foreach ($selectedItems as $barangId)
+                            @php
+                            $barang = \App\Models\Barang::findOrFail($barangId);
+                            @endphp
+                            <tr id="barang-row-{{ $barang->id }}">
+                                <td>{{ $barang->id }}</td>
+                                <td>{{ $barang->name }}</td>
+                                <td class="d-none d-sm-table-cell">{{ $barang->jumlah_stok }}</td>
+                                <td class="d-none d-sm-table-cell">{{ $barang->stok_minimum }}</td>
                                 <td>
                                     <input type="number" name="updateStok" id="updateStok">
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary btn-rounded btn-icon">
+                                    <button class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"
+                                        data-barang-id="{{ $barang->id }}" onclick="deleteBarang({{ $barang->id }})">
                                         <i class="mdi mdi-trash-can text-danger"></i>
                                     </button>
                                 </td>
+
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
-
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination mt-3">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
                 <div class="d-flex justify-content-end">
                     <form action="" class=" mt-3">
@@ -168,10 +139,66 @@
                         <button class="btn btn-light">Cancel</button>
                     </form>
                 </div>
+                @endif
             </div>
         </div>
     </div>
 
 </div>
 
+@endsection
+
+@section('page-script')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function addToSelectedList(barangId) {
+    console.log();
+    $.ajax({
+        url: '/tambah-barang',
+        type: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            barangId: barangId
+        },
+        success: function(response) {
+            // Perbarui halaman
+            location.reload();
+        },
+        error: function(xhr) {
+            console.log(xhr.responseText);
+        }
+    });
+}
+
+function deleteBarang(barangId) {
+    // Lakukan request AJAX ke endpoint penghapusan barang
+    // Gantikan URL '/delete-barang' sesuai dengan URL endpoint Anda
+    fetch('/delete-barang', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ barangId: barangId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Hapus baris tabel dari tampilan
+        if (data.success) {
+            const row = document.getElementById('barang-row-' + barangId);
+            if (row) {
+                row.remove();
+            }
+            // Perbarui jumlah barang yang dipilih
+            const selectedCount = document.getElementById('selected-count');
+            if (selectedCount) {
+                selectedCount.textContent = parseInt(selectedCount.textContent) - 1;
+            }
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+</script>
 @endsection

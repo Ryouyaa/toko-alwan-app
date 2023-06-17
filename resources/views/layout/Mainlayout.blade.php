@@ -40,6 +40,8 @@
 
 @include('layout.partials.footer-scripts')
 
+@yield('page-script')
+
 </body>
 
 </html>
