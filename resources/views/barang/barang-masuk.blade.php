@@ -104,7 +104,7 @@
                                 <th>Nama Barang</th>
                                 <th class="d-none d-sm-table-cell">Stok Barang</th>
                                 <th class="d-none d-sm-table-cell">Stok Minimum</th>
-                                <th>Update Jumlah Stok</th>
+                                <th>Jumlah Stok</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
