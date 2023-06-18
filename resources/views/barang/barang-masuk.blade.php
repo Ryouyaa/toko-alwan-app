@@ -96,54 +96,55 @@
                 <h4 class="card-title mb-0">Tabel Barang</h4>
                 <code>*List barang yang ingin diupdate</code>
                 @if (!empty($selectedItems))
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nama Barang</th>
-                                <th class="d-none d-sm-table-cell">Stok Barang</th>
-                                <th class="d-none d-sm-table-cell">Stok Minimum</th>
-                                <th>Jumlah Stok</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($selectedItems as $barangId)
-                            @php
-                            $barang = \App\Models\Barang::findOrFail($barangId);
-                            @endphp
-                            <tr id="barang-row-{{ $barang->id }}">
-                                <td>{{ $barang->id }}</td>
-                                <td>{{ $barang->name }}</td>
-                                <td class="d-none d-sm-table-cell">{{ $barang->jumlah_stok }}</td>
-                                <td class="d-none d-sm-table-cell">{{ $barang->stok_minimum }}</td>
-                                <td>
-                                    <input type="number" name="updateStok" id="updateStok">
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"
-                                        data-barang-id="{{ $barang->id }}" onclick="deleteBarang({{ $barang->id }})">
-                                        <i class="mdi mdi-trash-can text-danger"></i>
-                                    </button>
-                                </td>
+                <form id="updateForm" action="/update-barang" method="POST">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nama Barang</th>
+                                    <th class="d-none d-sm-table-cell">Stok Barang</th>
+                                    <th class="d-none d-sm-table-cell">Stok Minimum</th>
+                                    <th>Jumlah Stok</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($selectedItems as $barangId)
+                                @php
+                                $barang = \App\Models\Barang::findOrFail($barangId);
+                                @endphp
+                                <tr id="barang-row-{{ $barang->id }}">
+                                    <td>{{ $barang->id }}</td>
+                                    <td>{{ $barang->name }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $barang->jumlah_stok }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $barang->stok_minimum }}</td>
+                                    <td>
+                                        <input type="number" name="updateStok[{{ $barang->id }}]" id="updateStok-{{ $barang->id }}" value="{{ $barang->jumlah_stok }}" data-barang-id="{{ $barang->id }}">
 
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="d-flex justify-content-end">
-                    <form action="" class=" mt-3">
-                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"
+                                            data-barang-id="{{ $barang->id }}"
+                                            onclick="deleteBarang({{ $barang->id }})">
+                                            <i class="mdi mdi-trash-can text-danger"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    @csrf
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>
                         <button class="btn btn-light">Cancel</button>
-                    </form>
-                </div>
+                    </div>
+                </form>
                 @endif
             </div>
         </div>
     </div>
-
 </div>
 
 @endsection
@@ -151,8 +152,43 @@
 @section('page-script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    function submitUpdateForm() {
+    const form = document.getElementById('updateForm');
+    const updateStokInputs = form.querySelectorAll('input[name="updateStok[]"]');
+    const data = [];
+
+    updateStokInputs.forEach(function(input) {
+        const barangId = input.dataset.barangId;
+        const jumlahStok = input.value;
+
+        data.push(barangId); // Only store the barangId in the array
+    });
+
+    // ...
+
+    fetch('/update-barang', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ updateStok: data }) // Send the data as an object with the key 'updateStok'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Tampilkan pesan sukses atau lakukan aksi lain yang diperlukan
+            console.log('Update barang berhasil');
+        }
+    })
+    .catch(error => {
+        console.log(error);
+    });
+}
+</script>
+
+<script>
     function addToSelectedList(barangId) {
-    console.log();
     $.ajax({
         url: '/tambah-barang',
         type: 'POST',
@@ -161,8 +197,13 @@
             barangId: barangId
         },
         success: function(response) {
-            // Perbarui halaman
-            location.reload();
+            if (response.success) {
+                // Perbarui halaman
+                location.reload();
+            } else {
+                // Tampilkan pesan error
+                console.log(response.message);
+            }
         },
         error: function(xhr) {
             console.log(xhr.responseText);
@@ -200,5 +241,6 @@ function deleteBarang(barangId) {
         console.log(error);
     });
 }
+
 </script>
 @endsection

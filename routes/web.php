@@ -45,10 +45,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     // UPDATE BARANG
     Route::get('/barang-masuk', [BarangController::class, 'tambahView']);
+    Route::get('/barang-keluar', [BarangController::class, 'keluarView']);
+    
     Route::post('/tambah-barang', [BarangController::class, 'tambahBarang']);
     Route::post('/delete-barang', [BarangController::class, 'deleteBarang']);
-
-    Route::get('/barang-keluar', [BarangController::class, 'keluarView']);
+    Route::post('/update-barang', [BarangController::class, 'updateBarang']);
 
     // ADMIN
     Route::get('/profil', [AdminController::class, 'index']);

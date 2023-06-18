@@ -62,15 +62,22 @@ class BarangController extends Controller
         // Dapatkan barang yang dipilih dari sesi
         $selectedItems = session('selectedItems', []);
 
-        // Tambahkan barang baru ke dalam array barang yang dipilih
-        $selectedItems[] = $barangId;
+        // Cek apakah barang sudah ada dalam array barang yang dipilih
+        if (!in_array($barangId, $selectedItems)) {
+            // Tambahkan barang baru ke dalam array barang yang dipilih
+            $selectedItems[] = $barangId;
 
-        // Simpan array barang yang dipilih yang telah diperbarui ke dalam sesi
-        session(['selectedItems' => $selectedItems]);
+            // Simpan array barang yang dipilih yang telah diperbarui ke dalam sesi
+            session(['selectedItems' => $selectedItems]);
 
-        // Kembalikan respons yang menandakan keberhasilan
-        return response()->json(['success' => true]);
+            // Kembalikan respons yang menandakan keberhasilan
+            return response()->json(['success' => true]);
+        } else {
+            // Barang sudah ada dalam array barang yang dipilih, kembalikan respons dengan pesan error
+            return response()->json(['success' => false, 'message' => 'Barang sudah ada dalam daftar']);
+        }
     }
+
 
     public function deleteBarang(Request $request)
     {
@@ -94,6 +101,21 @@ class BarangController extends Controller
             return response()->json(['success' => false, 'message' => 'Gagal menghapus barang dari tampilan.']);
         }
     }
+
+    public function updateBarang(Request $request)
+    {
+        $updateStok = $request->input('updateStok');
+
+        foreach ($updateStok as $barangId => $jumlahStok) {
+            $barang = \App\Models\Barang::findOrFail($barangId);
+            $barang->jumlah_stok += $jumlahStok;
+            $barang->save();
+        }
+
+        return response()->json(['success' => true]);
+    }
+
+
 
 
     public function keluarView()
