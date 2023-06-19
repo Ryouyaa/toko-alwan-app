@@ -6,6 +6,13 @@
     <h2 class="welcome-text mb-3">Update Barang Masuk</h2>
 
     <div class="row justify-content-center">
+        <div id="successMessage" style="display: none" class="alert alert-success alert-dismissible fade show col-md-6" role="alert">
+            Data barang berhasil diperbarui.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
         <div class="col-md-6 mb-3">
             <form class="search-form input-group rounded" action="/barang-masuk">
                 <input name="search" type="search" class="form-control" placeholder="Search Here" title="Search here">
@@ -120,15 +127,16 @@
                                     <td class="d-none d-sm-table-cell">{{ $barang->jumlah_stok }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $barang->stok_minimum }}</td>
                                     <td>
-                                        <input type="number" name="updateStok[{{ $barang->id }}]" id="updateStok-{{ $barang->id }}" value="{{ $barang->jumlah_stok }}" data-barang-id="{{ $barang->id }}">
-
+                                        <input type="number" name="updateStok[{{ $barang->id }}]"
+                                            id="updateStok-{{ $barang->id }}" 
+                                            data-barang-id="{{ $barang->id }}">
                                     </td>
                                     <td>
-                                        <button class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"
+                                        <a class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"
                                             data-barang-id="{{ $barang->id }}"
                                             onclick="deleteBarang({{ $barang->id }})">
                                             <i class="mdi mdi-trash-can text-danger"></i>
-                                        </button>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -164,8 +172,6 @@
         data.push(barangId); // Only store the barangId in the array
     });
 
-    // ...
-
     fetch('/update-barang', {
         method: 'POST',
         headers: {
@@ -176,9 +182,12 @@
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            // Tampilkan pesan sukses atau lakukan aksi lain yang diperlukan
-            console.log('Update barang berhasil');
+    if (data.success) {
+        // Tampilkan pesan sukses
+        const successMessage = document.getElementById('successMessage');
+        if (successMessage) {
+            successMessage.style.display = 'block';
+            }
         }
     })
     .catch(error => {

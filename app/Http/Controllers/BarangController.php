@@ -115,9 +115,6 @@ class BarangController extends Controller
         return response()->json(['success' => true]);
     }
 
-
-
-
     public function keluarView()
     {
         return view('barang.barang-keluar');
