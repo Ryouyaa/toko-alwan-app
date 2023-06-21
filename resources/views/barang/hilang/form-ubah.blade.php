@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label for="detail">Detail</label>
-                            <textarea class="form-control @error('detail') is-invalid  @enderror" name="detail" id="detail" cols="30" rows="7" style="height: unset;" placeholder="Maksimal 80 karakter">{{ $lost->detail }}</textarea>
+                            <textarea class="form-control @error('detail') is-invalid  @enderror" name="detail" id="detail" cols="30" rows="7" style="height: unset;" placeholder="Maksimal 150 karakter">{{ $lost->detail }}</textarea>
                             @error('detail')
                             <div class="invalid-feedback">
                                 {{ $message }}

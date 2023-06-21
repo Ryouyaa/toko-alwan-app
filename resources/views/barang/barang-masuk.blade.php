@@ -129,7 +129,7 @@
                                     <td>
                                         <input type="number" name="updateStok[{{ $barang->id }}]"
                                             id="updateStok-{{ $barang->id }}" data-barang-id="{{ $barang->id }}"
-                                            value="{{ old('updateStok.' . $barang->id) }}">
+                                            value="{{ old('updateStok.' . $barang->id) }}" required>
                                     </td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"
@@ -146,7 +146,7 @@
                     @csrf
                     <div class="d-flex justify-content-end mt-3">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <button class="btn btn-light">Cancel</button>
+                        <a class="btn btn-light">Cancel</a>
                     </div>
                 </form>
                 @endif

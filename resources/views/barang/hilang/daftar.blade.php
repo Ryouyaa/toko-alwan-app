@@ -3,7 +3,7 @@
 @section('content-wrapper')
 
 <div class="content-wrapper">
-    <h2 class="welcome-text mb-3">Daftar Barang Hilang</h2>
+    <h2 class="welcome-text mb-3">Daftar Barang Hilang / Rusak</h2>
     <div class="row justify-content-center">
         <div class="col-md-6 mb-3">
             <form class="search-form input-group rounded" action="/daftar-hilang">
@@ -57,7 +57,7 @@
                                 <td>
                                     {{ $lost->jumlah_stok }}
                                 </td>
-                                <td>
+                                <td style="white-space: normal;">
                                     {{ $lost->detail }}
                                 </td>
                                 <td>

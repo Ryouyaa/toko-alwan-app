@@ -23,7 +23,7 @@
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic">
         <i class="menu-icon mdi mdi-alert-box"></i>
-        <span class="menu-title">Barang Hilang</span>
+        <span class="menu-title">Barang Hilang / Rusak</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="collapse" id="ui-basic">
@@ -37,13 +37,13 @@
     <li class="nav-item">
       <a class="nav-link" href="/barang-masuk">
         <i class="menu-icon mdi mdi-inbox-arrow-down"></i>
-        <span class="menu-title">Barang Masuk</span>
+        <span class="menu-title">Pembelian / Restok</span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/barang-keluar">
         <i class="menu-icon mdi mdi-inbox-arrow-up"></i>
-        <span class="menu-title">Barang Keluar</span>
+        <span class="menu-title">Penjualan</span>
       </a>
     </li>
     <li class="nav-item nav-category p-0">Laporan</li>
