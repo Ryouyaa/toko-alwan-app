@@ -4,14 +4,14 @@
 
 <div class="content-wrapper">
     <h2 class="welcome-text mb-3">Update Barang Masuk</h2>
-
+    @if (session()->has('success'))
     <div class="row justify-content-center">
-        <div id="successMessage" style="display: none" class="alert alert-success alert-dismissible fade show col-md-6" role="alert">
-            Data barang berhasil diperbarui.
+        <div class="alert alert-success alert-dismissible fade show col-md-6" role="alert">
+            {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     </div>
-
+    @endif
     <div class="row justify-content-center">
         <div class="col-md-6 mb-3">
             <form class="search-form input-group rounded" action="/barang-masuk">
@@ -128,8 +128,8 @@
                                     <td class="d-none d-sm-table-cell">{{ $barang->stok_minimum }}</td>
                                     <td>
                                         <input type="number" name="updateStok[{{ $barang->id }}]"
-                                            id="updateStok-{{ $barang->id }}" 
-                                            data-barang-id="{{ $barang->id }}">
+                                            id="updateStok-{{ $barang->id }}" data-barang-id="{{ $barang->id }}"
+                                            value="{{ old('updateStok.' . $barang->id) }}">
                                     </td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"
@@ -160,6 +160,25 @@
 @section('page-script')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    // Memperbarui nilai input jumlah stok ke penyimpanan lokal saat perubahan nilai input terjadi
+    $('input[name^="updateStok"]').on('input', function() {
+        var barangId = $(this).data('barang-id');
+        var jumlahStokValue = $(this).val();
+        localStorage.setItem('updateStokValue_' + barangId, jumlahStokValue);
+    });
+
+    // Memuat kembali nilai input jumlah stok dari penyimpanan lokal saat halaman dimuat
+    $(document).ready(function() {
+        $('input[name^="updateStok"]').each(function() {
+            var barangId = $(this).data('barang-id');
+            var storedJumlahStokValue = localStorage.getItem('updateStokValue_' + barangId);
+            if (storedJumlahStokValue) {
+                $(this).val(storedJumlahStokValue);
+            }
+        });
+    });
+</script>
+<script>
     function submitUpdateForm() {
     const form = document.getElementById('updateForm');
     const updateStokInputs = form.querySelectorAll('input[name="updateStok[]"]');
@@ -184,10 +203,6 @@
     .then(data => {
     if (data.success) {
         // Tampilkan pesan sukses
-        const successMessage = document.getElementById('successMessage');
-        if (successMessage) {
-            successMessage.style.display = 'block';
-            }
         }
     })
     .catch(error => {

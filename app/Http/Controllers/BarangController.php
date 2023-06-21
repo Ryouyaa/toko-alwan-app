@@ -104,6 +104,11 @@ class BarangController extends Controller
 
     public function updateBarang(Request $request)
     {
+        $selectedItems = session()->get('selectedItems', []);
+
+        // Menghapus semua elemen dari array $selectedItems
+        $request->session()->forget('selectedItems');
+
         $updateStok = $request->input('updateStok');
 
         foreach ($updateStok as $barangId => $jumlahStok) {
@@ -112,8 +117,9 @@ class BarangController extends Controller
             $barang->save();
         }
 
-        return response()->json(['success' => true]);
+        return redirect('/barang-masuk')->with('success', 'Data berhasil disimpan');
     }
+
 
     public function keluarView()
     {
