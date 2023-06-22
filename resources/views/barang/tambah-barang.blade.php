@@ -20,7 +20,7 @@
                             <label for="name">Nama</label>
                             <input name="name" type="text"
                                 class="form-control @error('name') is-invalid  @enderror" id="name"
-                                placeholder="Nama">
+                                placeholder="Nama" value="{{ old('name') }}">
                             @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -31,7 +31,7 @@
                             <label for="jumlah_stok">Jumlah Stok</label>
                             <input name="jumlah_stok" type="number"
                                 class="form-control @error('jumlah_stok') is-invalid  @enderror" id="jumlah_stok"
-                                placeholder="Jumlah Stok">
+                                placeholder="Jumlah Stok" value="{{ old('jumlah_stok') }}">
                             @error('jumlah_stok')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -42,7 +42,7 @@
                             <label for="stok_minimum">Stok Minimum</label>
                             <input name="stok_minimum" type="number"
                                 class="form-control @error('stok_minimum') is-invalid  @enderror" id="stok_minimum"
-                                placeholder="Jumlah Minimum">
+                                placeholder="Jumlah Minimum" value="{{ old('stok_minimum') }}">
                             @error('stok_minimum')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -53,7 +53,7 @@
                             <label for="harga_beli">Harga Beli (per PCS)</label>
                             <input name="harga_beli" type="number"
                                 class="form-control @error('harga_beli') is-invalid  @enderror" id="harga_beli"
-                                placeholder="Harga Beli">
+                                placeholder="Harga Beli" value="{{ old('harga_beli') }}">
                             @error('harga_beli')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -64,7 +64,7 @@
                             <label for="harga_jual">Harga Jual (per PCS)</label>
                             <input name="harga_jual" type="number"
                                 class="form-control @error('harga_jual') is-invalid  @enderror" id="harga_jual"
-                                placeholder="Harga Jual">
+                                placeholder="Harga Jual" value="{{ old('harga_jual') }}">
                             @error('harga_jual')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -72,27 +72,21 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="harga_grosir">Harga Jual (Grosir / per Pack)</label>
-                            <input name="harga_grosir" type="number"
-                                class="form-control @error('harga_grosir') is-invalid  @enderror" id="harga_grosir"
-                                placeholder="Harga Grosir">
-                            @error('harga_grosir')
+                            <label for="satuan" class="form-label">Satuan Barang</label>
+                            <select name="satuan" id="satuan" class="form-select @error('satuan') is-invalid  @enderror">
+                                <option value="">Pilih satuan barang</option>
+                                <option value="pcs">pcs</option>
+                                <option value="lusin">lusin</option>
+                                <option value="kodi">kodi</option>
+                                <option value="gross">gross</option>
+                                <option value="rim">rim</option>
+                            </select>
+                            @error('satuan')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
-                        {{-- <div class="form-group">
-                            <label for="satuan_barang" class="form-label">Satuan Barang</label>
-                            <select name="satuan_barang" id="satuan_barang" class="form-select"  disabled>
-                                <option selected>Pilih satuan barang</option>
-                                <option value="1">pcs</option>
-                                <option value="12">lusin</option>
-                                <option value="20">kodi</option>
-                                <option value="144">gross</option>
-                                <option value="500">rim</option>
-                            </select>
-                        </div> --}}
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>
                     </form>

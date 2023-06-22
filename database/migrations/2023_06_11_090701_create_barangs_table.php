@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('stok_minimum');
             $table->integer('harga_beli');
             $table->integer('harga_jual');
-            $table->integer('harga_grosir');
+            $table->string('satuan');
             $table->timestamps();
         });
     }

@@ -127,7 +127,7 @@
                                     <td class="d-none d-sm-table-cell">{{ $barang->jumlah_stok }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $barang->stok_minimum }}</td>
                                     <td>
-                                        <input type="number" name="updateStok[{{ $barang->id }}]"
+                                        <input size="10" type="number" name="updateStok[{{ $barang->id }}]"
                                             id="updateStok-{{ $barang->id }}" data-barang-id="{{ $barang->id }}"
                                             value="{{ old('updateStok.' . $barang->id) }}" required>
                                     </td>

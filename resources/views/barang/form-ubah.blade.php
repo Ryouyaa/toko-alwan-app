@@ -73,23 +73,12 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="harga_grosir">Harga Jual (Grosir / per Pack)</label>
-                            <input name="harga_grosir" type="number"
-                                class="form-control @error('harga_grosir') is-invalid  @enderror" id="harga_grosir"
-                                placeholder="Harga Jual" value="{{ $barang->harga_grosir }}">
-                            @error('harga_grosir')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                        {{-- <div class="form-group">
-                            <label for="satuan_barang" class="form-label">Satuan Barang</label>
-                            <select name="satuan_barang" id="satuan_barang" class="form-select" disabled>
-                                <option value="{{ $barang->satuan_barang }}" selected>{{ $barang->satuan_barang }}
+                            <label for="satuan" class="form-label">Satuan Barang</label>
+                            <select name="satuan" id="satuan" class="form-select" disabled>
+                                <option value="{{ $barang->satuan }}" selected>{{ $barang->satuan }}
                                 </option>
                             </select>
-                        </div> --}}
+                        </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>
                     </form>
