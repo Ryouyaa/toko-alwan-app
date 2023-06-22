@@ -100,7 +100,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-0">Tabel Barang</h4>
+                <h4 class="card-title mb-0">Daftar Barang Transaksi</h4>
                 <code>*List barang yang dijual</code>
                 @if (!empty($selectedItemsPenjualan))
                 <form id="updateForm" action="/update-barang-penjualan" method="POST">
@@ -145,7 +145,7 @@
                                 @endforeach
 
                             </tbody>
-                        </table>                        
+                        </table>
                     </div>
                     <div class="d-flex justify-content-end">
                         <div class="col-lg-2 col-4 my-auto">
@@ -153,7 +153,7 @@
                         </div>
                         <div class="col-lg-2 col-4 p-2">
                             <input type="text" class="form-control input-sm" id="diskon" name="diskon">
-                        </div>                       
+                        </div>
                     </div>
                     <div class="d-flex justify-content-end">
                         <div class="col-lg-2 col-4 my-auto">
@@ -178,189 +178,194 @@
 @endsection
 
 @section('page-script')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>
 <script>
     // Memperbarui nilai input jumlah stok ke penyimpanan lokal saat perubahan nilai input terjadi
-    $('input[name^="updateStok"]').on('input', function() {
-        var barangId = $(this).data('barang-id');
-        var jumlahStokValue = $(this).val();
-        localStorage.setItem('updateStokValue_' + barangId, jumlahStokValue);
-    });
+   $('input[name^="updateStok"]').on('input', function () {
+      var barangId = $(this).data('barang-id');
+      var jumlahStokValue = $(this).val();
+      localStorage.setItem('updateStokValue_' + barangId, jumlahStokValue);
+   });
 
     // Memuat kembali nilai input jumlah stok dari penyimpanan lokal saat halaman dimuat
-    $(document).ready(function() {
-        $('input[name^="updateStok"]').each(function() {
-            var barangId = $(this).data('barang-id');
-            var storedJumlahStokValue = localStorage.getItem('updateStokValue_' + barangId);
-            if (storedJumlahStokValue) {
-                $(this).val(storedJumlahStokValue);
-            }
+    $(document).ready(function () {
+    $('input[name^="updateStok"]').each(function () {
+        var barangId = $(this).data('barang-id');
+        var storedJumlahStokValue = localStorage.getItem('updateStokValue_' + barangId);
+        if (storedJumlahStokValue) {
+            $(this).val(storedJumlahStokValue);
+        }
+    });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    // Ambil semua elemen input jumlah
+    var inputJumlah = document.querySelectorAll('input[name^="updateStok"]');
+
+    // Tambahkan event listener untuk input diskon
+    var diskonInput = document.getElementById('diskon');
+    diskonInput.addEventListener('blur', function () {
+        var diskonValue = parseInt(diskonInput.value.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari input diskon
+        var totalElem = document.getElementById('total');
+        var total = parseInt(totalElem.textContent.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari total
+
+        var finalTotal = total - diskonValue; // Hitung total setelah diskon
+
+        // Perbarui elemen total dengan nilai yang baru dihitung
+        totalElem.textContent = 'Rp ' + finalTotal.toLocaleString(); // Tampilkan total setelah diskon dengan format yang diinginkan
+    });
+
+    // Tambahkan event listener untuk setiap input jumlah
+    inputJumlah.forEach(function (input) {
+        input.addEventListener('input', function () {
+            var jumlah = parseInt(input.value); // Ambil nilai input jumlah
+            var harga = parseInt(input.getAttribute('data-harga')); // Ambil nilai harga dari atribut data-harga
+            var subtotal = jumlah * harga; // Hitung subtotal
+
+            // Perbarui elemen subtotal dengan nilai yang baru dihitung
+            var subtotalElem = input.parentNode.nextElementSibling; // Dapatkan elemen subtotal terkait
+            subtotalElem.textContent = 'Rp ' + subtotal.toLocaleString(); // Tampilkan subtotal dengan format yang diinginkan
+
+            // Hitung total berdasarkan subtotal yang diperbarui
+            var subtotals = document.querySelectorAll('.subtotal'); // Ambil semua elemen subtotal
+            var total = 0;
+            subtotals.forEach(function (subtotalElem) {
+                var subtotalValue = parseInt(subtotalElem.textContent.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari subtotal
+                total += subtotalValue; // Tambahkan subtotal ke total
+            });
+
+            // Perbarui elemen total dengan nilai yang baru dihitung
+            var totalElem = document.getElementById('total');
+            totalElem.textContent = 'Rp ' + total.toLocaleString(); // Tampilkan total dengan format yang diinginkan
         });
     });
-    
-    document.addEventListener('DOMContentLoaded', function() {
-  // Ambil semua elemen input jumlah
-  var inputJumlah = document.querySelectorAll('input[name^="updateStok"]');
 
-  // Tambahkan event listener untuk input diskon
-  var diskonInput = document.getElementById('diskon');
-  diskonInput.addEventListener('blur', function() {
-    var diskonValue = parseInt(diskonInput.value.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari input diskon
-    var totalElem = document.getElementById('total');
-    var total = parseInt(totalElem.textContent.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari total
-
-    var finalTotal = total - diskonValue; // Hitung total setelah diskon
-
-    // Perbarui elemen total dengan nilai yang baru dihitung
-    totalElem.textContent = 'Rp ' + finalTotal.toLocaleString(); // Tampilkan total setelah diskon dengan format yang diinginkan
-  });
-
-  // Tambahkan event listener untuk setiap input jumlah
-  inputJumlah.forEach(function(input) {
-    input.addEventListener('input', function() {
-      var jumlah = parseInt(input.value); // Ambil nilai input jumlah
-      var harga = parseInt(input.getAttribute('data-harga')); // Ambil nilai harga dari atribut data-harga
-      var subtotal = jumlah * harga; // Hitung subtotal
-
-      // Perbarui elemen subtotal dengan nilai yang baru dihitung
-      var subtotalElem = input.parentNode.nextElementSibling; // Dapatkan elemen subtotal terkait
-      subtotalElem.textContent = 'Rp ' + subtotal.toLocaleString(); // Tampilkan subtotal dengan format yang diinginkan
-
-      // Hitung total berdasarkan subtotal yang diperbarui
-      var subtotals = document.querySelectorAll('.subtotal'); // Ambil semua elemen subtotal
-      var total = 0;
-      subtotals.forEach(function(subtotalElem) {
-        var subtotalValue = parseInt(subtotalElem.textContent.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari subtotal
-        total += subtotalValue; // Tambahkan subtotal ke total
-      });
-
-      // Perbarui elemen total dengan nilai yang baru dihitung
-      var totalElem = document.getElementById('total');
-      totalElem.textContent = 'Rp ' + total.toLocaleString(); // Tampilkan total dengan format yang diinginkan
+    // Trigger event input untuk menghitung subtotal saat halaman dimuat ulang
+    var event = new Event('input');
+    inputJumlah.forEach(function (input) {
+        input.dispatchEvent(event);
     });
-  });
-
-  // Trigger event input untuk menghitung subtotal saat halaman dimuat ulang
-  var event = new Event('input');
-  inputJumlah.forEach(function(input) {
-    input.dispatchEvent(event);
-  });
-});
-
+    });
 </script>
+
 <script>
     function submitUpdateForm() {
     const form = document.getElementById('updateForm');
-    const updateStokInputs = form.querySelectorAll('input[name="updateStok[]"]');
+    const updateStokInputs = form.querySelectorAll('input[name^="updateStok["]');
     const data = [];
 
-    updateStokInputs.forEach(function(input) {
+    updateStokInputs.forEach(function (input) {
         const barangId = input.dataset.barangId;
         const jumlahStok = input.value;
 
-        data.push(barangId); // Only store the barangId in the array
+        data.push({
+            barangId: barangId,
+            jumlahStok: jumlahStok
+        });
     });
 
-    fetch('/update-barang-penjualan', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ updateStok: data }) // Send the data as an object with the key 'updateStok'
-    })
-    .then(response => response.json())
-    .then(data => {
-    if (data.success) {
-        // Tampilkan pesan sukses
-        }
-    })
-    .catch(error => {
-        console.log(error);
+        fetch('/update-barang-penjualan', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Menangani respon dari server setelah penyimpanan berhasil
+            console.log(data);
+            // Lakukan tindakan lain yang sesuai, seperti menampilkan pesan sukses atau memperbarui tampilan
+        })
+        .catch(error => {
+            // Menangani error jika terjadi kesalahan
+            console.error('Error:', error);
+            // Lakukan tindakan lain yang sesuai, seperti menampilkan pesan error atau memberikan feedback ke pengguna
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+    // Ambil semua elemen input jumlah
+    var inputJumlah = document.querySelectorAll('input[name^="updateStok"]');
+
+    // Tambahkan event listener untuk setiap input jumlah
+    inputJumlah.forEach(function (input) {
+        input.addEventListener('input', function () {
+            var jumlah = parseInt(input.value); // Ambil nilai input jumlah
+            var harga = parseInt(input.getAttribute('data-harga')); // Ambil nilai harga dari atribut data-harga
+            var subtotal = jumlah * harga; // Hitung subtotal
+
+            // Perbarui elemen subtotal dengan nilai yang baru dihitung
+            var subtotalElem = input.parentNode.nextElementSibling; // Dapatkan elemen subtotal terkait
+            subtotalElem.textContent = 'Rp ' + subtotal.toLocaleString(); // Tampilkan subtotal dengan format yang diinginkan
+        });
     });
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Ambil semua elemen input jumlah
-  var inputJumlah = document.querySelectorAll('input[name^="updateStok"]');
-
-  // Tambahkan event listener untuk setiap input jumlah
-  inputJumlah.forEach(function(input) {
-    input.addEventListener('input', function() {
-      var jumlah = parseInt(input.value); // Ambil nilai input jumlah
-      var harga = parseInt(input.getAttribute('data-harga')); // Ambil nilai harga dari atribut data-harga
-      var subtotal = jumlah * harga; // Hitung subtotal
-
-      // Perbarui elemen subtotal dengan nilai yang baru dihitung
-      var subtotalElem = input.parentNode.nextElementSibling; // Dapatkan elemen subtotal terkait
-      subtotalElem.textContent = 'Rp ' + subtotal.toLocaleString(); // Tampilkan subtotal dengan format yang diinginkan
+    // Trigger event input untuk menghitung subtotal saat halaman dimuat ulang
+    var event = new Event('input');
+    inputJumlah.forEach(function (input) {
+        input.dispatchEvent(event);
     });
-  });
-
-  // Trigger event input untuk menghitung subtotal saat halaman dimuat ulang
-  var event = new Event('input');
-  inputJumlah.forEach(function(input) {
-    input.dispatchEvent(event);
-  });
-});
-
-
+    });
 </script>
 
 <script>
     function addToSelectedList(barangId) {
-    $.ajax({
-        url: '/tambah-barang-penjualan',
-        type: 'POST',
-        data: {
+      $.ajax({
+         url: '/tambah-barang-penjualan',
+         type: 'POST',
+         data: {
             _token: '{{ csrf_token() }}',
             barangId: barangId
-        },
-        success: function(response) {
+         },
+         success: function (response) {
             if (response.success) {
-                // Perbarui halaman
-                location.reload();
+               // Perbarui halaman
+               location.reload();
             } else {
-                // Tampilkan pesan error
-                console.log(response.message);
+               // Tampilkan pesan error
+               console.log(response.message);
             }
-        },
-        error: function(xhr) {
+         },
+         error: function (xhr) {
             console.log(xhr.responseText);
-        }
-    });
-}
+         }
+      });
+   }
 
-function deleteBarang(barangId) {
+    function deleteBarang(barangId) {
     // Lakukan request AJAX ke endpoint penghapusan barang
     // Gantikan URL '/delete-barang-penjualan' sesuai dengan URL endpoint Anda
     fetch('/delete-barang-penjualan', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ barangId: barangId })
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Hapus baris tabel dari tampilan
-        if (data.success) {
-            const row = document.getElementById('barang-row-' + barangId);
-            if (row) {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                barangId: barangId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Hapus baris tabel dari tampilan
+            if (data.success) {
+                const row = document.getElementById('barang-row-' + barangId);
+                if (row) {
                 row.remove();
-            }
-            // Perbarui jumlah barang yang dipilih
-            const selectedCount = document.getElementById('selected-count');
-            if (selectedCount) {
+                }
+                // Perbarui jumlah barang yang dipilih
+                const selectedCount = document.getElementById('selected-count');
+                if (selectedCount) {
                 selectedCount.textContent = parseInt(selectedCount.textContent) - 1;
+                }
             }
-        }
-    })
-    .catch(error => {
-        console.log(error);
-    });
-}
-
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
 </script>
+
 @endsection

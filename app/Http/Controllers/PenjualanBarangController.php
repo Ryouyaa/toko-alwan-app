@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Penjualan;
+use App\Models\DetailPenjualan;
 use Illuminate\Http\Request;
 
 class PenjualanBarangController extends Controller
@@ -87,9 +89,37 @@ class PenjualanBarangController extends Controller
 
         foreach ($updateStok as $barangId => $jumlahStok) {
             $barang = \App\Models\Barang::findOrFail($barangId);
-            $barang->jumlah_stok += $jumlahStok;
+            $barang->jumlah_stok -= $jumlahStok;
             $barang->save();
         }
+
+        // Membuat data penjualan
+        $penjualan = new Penjualan();
+        $penjualan->user_id = auth()->user()->id; // Menggunakan user yang sedang login
+        $penjualan->tanggal_transaksi = now(); // Menggunakan tanggal dan waktu saat ini
+        $penjualan->total_harga = 0; // Inisialisasi total harga dengan 0
+        $penjualan->save();
+
+        // Membuat data detail penjualan
+        $totalHarga = 0; // Variabel untuk menghitung total harga penjualan
+        foreach ($updateStok as $barangId => $jumlahStok) {
+            $barang = \App\Models\Barang::findOrFail($barangId);
+            $barang->jumlah_stok -= $jumlahStok;
+            $barang->save();
+
+            $detailPenjualan = new DetailPenjualan();
+            $detailPenjualan->penjualan_id = $penjualan->id;
+            $detailPenjualan->barang_id = $barangId;
+            $detailPenjualan->jumlah = $jumlahStok;
+            $detailPenjualan->jumlah_harga = $barang->harga_jual * $jumlahStok;
+            $detailPenjualan->save();
+
+            $totalHarga += $detailPenjualan->jumlah_harga;
+        }
+
+        // Mengupdate total harga pada data penjualan
+        $penjualan->total_harga = $totalHarga;
+        $penjualan->save();
 
         return redirect('/barang-keluar')->with('success', 'Data berhasil disimpan');
     }
