@@ -108,11 +108,12 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>ID</th>
                                     <th>Nama Barang</th>
-                                    <th class="d-none d-sm-table-cell">Stok Barang</th>
-                                    <th class="d-none d-sm-table-cell">Stok Minimum</th>
-                                    <th>Jumlah Stok</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah</th>
+                                    <th>SubTotal</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -122,15 +123,17 @@
                                 $barang = \App\Models\Barang::findOrFail($barangId);
                                 @endphp
                                 <tr id="barang-row-{{ $barang->id }}">
+                                    <td>{{ $barangs->firstItem() + $loop->index }}</td>
                                     <td>{{ $barang->id }}</td>
                                     <td>{{ $barang->name }}</td>
-                                    <td class="d-none d-sm-table-cell">{{ $barang->jumlah_stok }}</td>
-                                    <td class="d-none d-sm-table-cell">{{ $barang->stok_minimum }}</td>
+                                    <td>Rp {{ number_format($barang->harga_jual, 0, ',', '.') }}</td>
                                     <td>
                                         <input size="10" type="number" name="updateStok[{{ $barang->id }}]"
-                                            id="updateStok-{{ $barang->id }}" data-barang-id="{{ $barang->id }}"
-                                            value="{{ old('updateStok.' . $barang->id) }}" required>
+                                            id="updateStok-{{ $barang->id }}" data-harga="{{ $barang->harga_jual }}"
+                                            data-barang-id="{{ $barang->id }}"
+                                            value="{{ old('updateStok.' . $barang->id) }}" min="1" required>
                                     </td>
+                                    <td id="subtotal-{{ $barang->id }}" class="subtotal">Rp 0</td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"
                                             data-barang-id="{{ $barang->id }}"
@@ -140,8 +143,17 @@
                                     </td>
                                 </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
+                        <div class="d-flex flex-row-reverse">
+                            <div class="p-2">
+                                <input size="15" type="text" class="form-control" id="diskon" name="diskon">
+                            </div>
+                            <div class="p-2">
+                                <label for="diskon">Diskon</label>
+                            </div>
+                        </div>
                     </div>
                     @csrf
                     <div class="d-flex justify-content-end mt-3">
@@ -209,6 +221,32 @@
         console.log(error);
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Ambil semua elemen input jumlah
+  var inputJumlah = document.querySelectorAll('input[name^="updateStok"]');
+
+  // Tambahkan event listener untuk setiap input jumlah
+  inputJumlah.forEach(function(input) {
+    input.addEventListener('input', function() {
+      var jumlah = parseInt(input.value); // Ambil nilai input jumlah
+      var harga = parseInt(input.getAttribute('data-harga')); // Ambil nilai harga dari atribut data-harga
+      var subtotal = jumlah * harga; // Hitung subtotal
+
+      // Perbarui elemen subtotal dengan nilai yang baru dihitung
+      var subtotalElem = input.parentNode.nextElementSibling; // Dapatkan elemen subtotal terkait
+      subtotalElem.textContent = 'Rp ' + subtotal.toLocaleString(); // Tampilkan subtotal dengan format yang diinginkan
+    });
+  });
+
+  // Trigger event input untuk menghitung subtotal saat halaman dimuat ulang
+  var event = new Event('input');
+  inputJumlah.forEach(function(input) {
+    input.dispatchEvent(event);
+  });
+});
+
+
 </script>
 
 <script>

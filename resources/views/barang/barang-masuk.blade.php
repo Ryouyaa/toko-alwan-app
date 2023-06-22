@@ -112,7 +112,7 @@
                                     <th>Nama Barang</th>
                                     <th class="d-none d-sm-table-cell">Stok Barang</th>
                                     <th class="d-none d-sm-table-cell">Stok Minimum</th>
-                                    <th>Jumlah Stok</th>
+                                    <th>Jumlah</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -129,7 +129,7 @@
                                     <td>
                                         <input size="10" type="number" name="updateStok[{{ $barang->id }}]"
                                             id="updateStok-{{ $barang->id }}" data-barang-id="{{ $barang->id }}"
-                                            value="{{ old('updateStok.' . $barang->id) }}" required>
+                                            value="{{ old('updateStok.' . $barang->id) }}" min="1" required>
                                     </td>
                                     <td>
                                         <a class="btn btn-sm btn-outline-secondary btn-rounded btn-icon"

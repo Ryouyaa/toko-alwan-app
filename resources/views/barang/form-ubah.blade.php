@@ -32,7 +32,7 @@
                             <label for="jumlah_stok">Jumlah Stok</label>
                             <input name="jumlah_stok" type="number"
                                 class="form-control @error('jumlah_stok') is-invalid  @enderror" id="jumlah_stok"
-                                placeholder="Jumlah Stok" value="{{ $barang->jumlah_stok }}">
+                                placeholder="Jumlah Stok" min="0" value="{{ $barang->jumlah_stok }}">
                             @error('jumlah_stok')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -43,7 +43,7 @@
                             <label for="stok_minimum">Stok Minimum</label>
                             <input name="stok_minimum" type="number"
                                 class="form-control @error('stok_minimum') is-invalid  @enderror" id="stok_minimum"
-                                placeholder="Jumlah Minimum" value="{{ $barang->stok_minimum }}">
+                                placeholder="Jumlah Minimum" min="0" value="{{ $barang->stok_minimum }}">
                             @error('stok_minimum')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -54,7 +54,7 @@
                             <label for="harga_beli">Harga Beli (per PCS)</label>
                             <input name="harga_beli" type="number"
                                 class="form-control @error('harga_beli') is-invalid  @enderror" id="harga_beli"
-                                placeholder="Harga Beli" value="{{ $barang->harga_beli }}">
+                                placeholder="Harga Beli" min="0" value="{{ $barang->harga_beli }}">
                             @error('harga_beli')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -65,7 +65,7 @@
                             <label for="harga_jual">Harga Jual (per PCS)</label>
                             <input name="harga_jual" type="number"
                                 class="form-control @error('harga_jual') is-invalid  @enderror" id="harga_jual"
-                                placeholder="Harga Jual" value="{{ $barang->harga_jual }}">
+                                placeholder="Harga Jual" min="0" value="{{ $barang->harga_jual }}">
                             @error('harga_jual')
                             <div class="invalid-feedback">
                                 {{ $message }}

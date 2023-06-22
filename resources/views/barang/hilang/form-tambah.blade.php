@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label for="jumlahStok">Jumlah Stok</label>
-                            <input type="number" class="form-control @error('jumlah_stok') is-invalid  @enderror" id="jumlahStok" name="jumlah_stok" placeholder="Jumlah Stok">
+                            <input type="number" class="form-control @error('jumlah_stok') is-invalid  @enderror" id="jumlahStok" name="jumlah_stok" min="0" placeholder="Jumlah Stok">
                             @error('jumlah_stok')
                             <div class="invalid-feedback">
                                 {{ $message }}
