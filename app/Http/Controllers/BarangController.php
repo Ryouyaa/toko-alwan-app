@@ -30,6 +30,28 @@ class BarangController extends Controller
         $barangs->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
 
         return view('barang.daftar-barang', compact('barangs'));
+    }    
+
+    public function keluarView(Request $request)
+    {
+        // Ambil barang yang dipilih dari sesi
+        $selectedItems = session('selectedItems', []);
+        $search = $request->input('search');
+
+        $barangs = Barang::query();
+
+        if ($search) {
+            $barangs->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('id', $search);
+            });
+        }
+
+        $barangs = $barangs->paginate(5);
+
+        $barangs->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
+
+        return view('barang.barang-keluar', compact('barangs', 'search', 'selectedItems'));
     }
 
 
@@ -118,12 +140,6 @@ class BarangController extends Controller
         }
 
         return redirect('/barang-masuk')->with('success', 'Data berhasil disimpan');
-    }
-
-
-    public function keluarView()
-    {
-        return view('barang.barang-keluar');
     }
 
     /**

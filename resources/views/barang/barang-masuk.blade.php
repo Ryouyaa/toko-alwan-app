@@ -3,7 +3,7 @@
 @section('content-wrapper')
 
 <div class="content-wrapper">
-    <h2 class="welcome-text mb-3">Update Barang Masuk</h2>
+    <h2 class="welcome-text mb-3">Pembelian / Restok</h2>
     @if (session()->has('success'))
     <div class="row justify-content-center">
         <div class="alert alert-success alert-dismissible fade show col-md-6" role="alert">
