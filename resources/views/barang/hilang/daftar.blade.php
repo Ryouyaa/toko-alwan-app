@@ -57,6 +57,9 @@
                                 <td>
                                     {{ $lost->jumlah_stok }}
                                 </td>
+                                <td>
+                                    {{ $lost->kategori }}
+                                </td>
                                 <td style="white-space: normal;">
                                     {{ $lost->detail }}
                                 </td>

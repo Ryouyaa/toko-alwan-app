@@ -36,6 +36,19 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="kategori" class="form-label">Kategori Barang</label>
+                            <select name="kategori" id="kategori" class="form-select @error('kategori') is-invalid  @enderror">
+                                <option value="">Pilih kategori barang</option>
+                                <option value="hilang">hilang</option>
+                                <option value="rusak">rusak</option>
+                            </select>
+                            @error('kategori')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="detail">Detail</label>
                             <textarea class="form-control @error('detail') is-invalid  @enderror" name="detail" id="detail" cols="30" rows="7" style="height: unset;" placeholder="Maksimal 150 karakter"></textarea>
                             @error('detail')

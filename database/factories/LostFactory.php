@@ -20,6 +20,7 @@ class LostFactory extends Factory
         return [   
             'barang_id' => $this->faker->randomElement(Barang::pluck('id')),
             'jumlah_stok' => fake()->numberBetween(20, 100),
+            'kategori' => fake()->randomElement(['hilang', 'rusak']),
             'detail' => fake()->text(85)
         ];
     }
