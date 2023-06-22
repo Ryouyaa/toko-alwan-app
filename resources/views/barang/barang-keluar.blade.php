@@ -101,7 +101,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-0">Tabel Barang</h4>
-                <code>*List barang yang ingin diupdate</code>
+                <code>*List barang yang dijual</code>
                 @if (!empty($selectedItemsPenjualan))
                 <form id="updateForm" action="/update-barang-penjualan" method="POST">
                     <div class="table-responsive">
@@ -109,7 +109,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>ID</th>
+                                    <th class="d-none d-sm-table-cell">ID</th>
                                     <th>Nama Barang</th>
                                     <th>Harga</th>
                                     <th>Jumlah</th>
@@ -124,7 +124,7 @@
                                 @endphp
                                 <tr id="barang-row-{{ $barang->id }}">
                                     <td>{{ $barangs->firstItem() + $loop->index }}</td>
-                                    <td>{{ $barang->id }}</td>
+                                    <td class="d-none d-sm-table-cell">{{ $barang->id }}</td>
                                     <td>{{ $barang->name }}</td>
                                     <td>Rp {{ number_format($barang->harga_jual, 0, ',', '.') }}</td>
                                     <td>
@@ -145,14 +145,22 @@
                                 @endforeach
 
                             </tbody>
-                        </table>
-                        <div class="d-flex flex-row-reverse">
-                            <div class="p-2">
-                                <input size="15" type="text" class="form-control" id="diskon" name="diskon">
-                            </div>
-                            <div class="p-2">
-                                <label for="diskon">Diskon</label>
-                            </div>
+                        </table>                        
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="col-lg-2 col-4 my-auto">
+                            <label for="diskon">Diskon (Rp)</label>
+                        </div>
+                        <div class="col-lg-2 col-4 p-2">
+                            <input type="text" class="form-control input-sm" id="diskon" name="diskon">
+                        </div>                       
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="col-lg-2 col-4 my-auto">
+                            <label>Total</label>
+                        </div>
+                        <div class="col-lg-2 col-4 px-2">
+                            <p5 id="total">Rp 0</p5>
                         </div>
                     </div>
                     @csrf
@@ -189,6 +197,56 @@
             }
         });
     });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+  // Ambil semua elemen input jumlah
+  var inputJumlah = document.querySelectorAll('input[name^="updateStok"]');
+
+  // Tambahkan event listener untuk input diskon
+  var diskonInput = document.getElementById('diskon');
+  diskonInput.addEventListener('blur', function() {
+    var diskonValue = parseInt(diskonInput.value.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari input diskon
+    var totalElem = document.getElementById('total');
+    var total = parseInt(totalElem.textContent.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari total
+
+    var finalTotal = total - diskonValue; // Hitung total setelah diskon
+
+    // Perbarui elemen total dengan nilai yang baru dihitung
+    totalElem.textContent = 'Rp ' + finalTotal.toLocaleString(); // Tampilkan total setelah diskon dengan format yang diinginkan
+  });
+
+  // Tambahkan event listener untuk setiap input jumlah
+  inputJumlah.forEach(function(input) {
+    input.addEventListener('input', function() {
+      var jumlah = parseInt(input.value); // Ambil nilai input jumlah
+      var harga = parseInt(input.getAttribute('data-harga')); // Ambil nilai harga dari atribut data-harga
+      var subtotal = jumlah * harga; // Hitung subtotal
+
+      // Perbarui elemen subtotal dengan nilai yang baru dihitung
+      var subtotalElem = input.parentNode.nextElementSibling; // Dapatkan elemen subtotal terkait
+      subtotalElem.textContent = 'Rp ' + subtotal.toLocaleString(); // Tampilkan subtotal dengan format yang diinginkan
+
+      // Hitung total berdasarkan subtotal yang diperbarui
+      var subtotals = document.querySelectorAll('.subtotal'); // Ambil semua elemen subtotal
+      var total = 0;
+      subtotals.forEach(function(subtotalElem) {
+        var subtotalValue = parseInt(subtotalElem.textContent.replace(/[^0-9]/g, '')); // Hapus karakter non-digit dari subtotal
+        total += subtotalValue; // Tambahkan subtotal ke total
+      });
+
+      // Perbarui elemen total dengan nilai yang baru dihitung
+      var totalElem = document.getElementById('total');
+      totalElem.textContent = 'Rp ' + total.toLocaleString(); // Tampilkan total dengan format yang diinginkan
+    });
+  });
+
+  // Trigger event input untuk menghitung subtotal saat halaman dimuat ulang
+  var event = new Event('input');
+  inputJumlah.forEach(function(input) {
+    input.dispatchEvent(event);
+  });
+});
+
 </script>
 <script>
     function submitUpdateForm() {

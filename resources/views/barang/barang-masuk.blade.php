@@ -101,7 +101,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-0">Tabel Barang</h4>
-                <code>*List barang yang ingin diupdate</code>
+                <code>*List barang yang direstok</code>
                 @if (!empty($selectedItems))
                 <form id="updateForm" action="/update-barang-pembelian" method="POST">
                     <div class="table-responsive">

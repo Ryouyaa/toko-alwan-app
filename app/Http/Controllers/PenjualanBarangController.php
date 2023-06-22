@@ -91,6 +91,6 @@ class PenjualanBarangController extends Controller
             $barang->save();
         }
 
-        return redirect('/barang-masuk')->with('success', 'Data berhasil disimpan');
+        return redirect('/barang-keluar')->with('success', 'Data berhasil disimpan');
     }
 }
