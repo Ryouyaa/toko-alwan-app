@@ -102,8 +102,8 @@
             <div class="card-body">
                 <h4 class="card-title mb-0">Tabel Barang</h4>
                 <code>*List barang yang ingin diupdate</code>
-                @if (!empty($selectedItems))
-                <form id="updateForm" action="/update-barang" method="POST">
+                @if (!empty($selectedItemsPenjualan))
+                <form id="updateForm" action="/update-barang-penjualan" method="POST">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -118,7 +118,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($selectedItems as $barangId)
+                                @foreach ($selectedItemsPenjualan as $barangId)
                                 @php
                                 $barang = \App\Models\Barang::findOrFail($barangId);
                                 @endphp
@@ -203,7 +203,7 @@
         data.push(barangId); // Only store the barangId in the array
     });
 
-    fetch('/update-barang', {
+    fetch('/update-barang-penjualan', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
     function addToSelectedList(barangId) {
     $.ajax({
-        url: '/tambah-barang',
+        url: '/tambah-barang-penjualan',
         type: 'POST',
         data: {
             _token: '{{ csrf_token() }}',
@@ -275,8 +275,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function deleteBarang(barangId) {
     // Lakukan request AJAX ke endpoint penghapusan barang
-    // Gantikan URL '/delete-barang' sesuai dengan URL endpoint Anda
-    fetch('/delete-barang', {
+    // Gantikan URL '/delete-barang-penjualan' sesuai dengan URL endpoint Anda
+    fetch('/delete-barang-penjualan', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

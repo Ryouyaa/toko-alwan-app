@@ -103,7 +103,7 @@
                 <h4 class="card-title mb-0">Tabel Barang</h4>
                 <code>*List barang yang ingin diupdate</code>
                 @if (!empty($selectedItems))
-                <form id="updateForm" action="/update-barang" method="POST">
+                <form id="updateForm" action="/update-barang-pembelian" method="POST">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -191,7 +191,7 @@
         data.push(barangId); // Only store the barangId in the array
     });
 
-    fetch('/update-barang', {
+    fetch('/update-barang-pembelian', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -214,7 +214,7 @@
 <script>
     function addToSelectedList(barangId) {
     $.ajax({
-        url: '/tambah-barang',
+        url: '/tambah-barang-pembelian',
         type: 'POST',
         data: {
             _token: '{{ csrf_token() }}',
@@ -237,8 +237,8 @@
 
 function deleteBarang(barangId) {
     // Lakukan request AJAX ke endpoint penghapusan barang
-    // Gantikan URL '/delete-barang' sesuai dengan URL endpoint Anda
-    fetch('/delete-barang', {
+    // Gantikan URL '/delete-barang-pembelian' sesuai dengan URL endpoint Anda
+    fetch('/delete-barang-pembelian', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

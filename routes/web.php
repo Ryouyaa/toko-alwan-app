@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
-use App\Http\Controllers\LostController;
+use App\Http\Controllers\PembelianBarangController;
+use App\Http\Controllers\PenjualanBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,12 +46,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/barang-hilang/form/{barang:id}', [LostController::class, 'create']);
 
     // UPDATE BARANG
-    Route::get('/barang-masuk', [BarangController::class, 'tambahView']);
-    Route::get('/barang-keluar', [BarangController::class, 'keluarView']);
+    Route::get('/barang-masuk', [PembelianBarangController::class, 'tambahView']);
     
-    Route::post('/tambah-barang', [BarangController::class, 'tambahBarang']);
-    Route::post('/delete-barang', [BarangController::class, 'deleteBarang']);
-    Route::post('/update-barang', [BarangController::class, 'updateBarang']);
+    Route::post('/tambah-barang-pembelian', [PembelianBarangController::class, 'tambahBarang']);
+    Route::post('/delete-barang-pembelian', [PembelianBarangController::class, 'deleteBarang']);
+    Route::post('/update-barang-pembelian', [PembelianBarangController::class, 'updateBarang']);
+
+    Route::get('/barang-keluar', [PenjualanBarangController::class, 'keluarView']);
+
+    Route::post('/tambah-barang-penjualan', [PenjualanBarangController::class, 'tambahBarang']);
+    Route::post('/delete-barang-penjualan', [PenjualanBarangController::class, 'deleteBarang']);
+    Route::post('/update-barang-penjualan', [PenjualanBarangController::class, 'updateBarang']);
 
     // ADMIN
     Route::get('/profil', [AdminController::class, 'index']);
