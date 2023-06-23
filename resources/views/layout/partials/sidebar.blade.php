@@ -48,9 +48,9 @@
     </li>
     <li class="nav-item nav-category p-0">Laporan</li>
     <li class="nav-item">
-      <a class="nav-link" href="#auth">
+      <a class="nav-link" href="/laporan-keuangan">
         <i class="menu-icon mdi mdi-file-chart"></i>
-        <span class="menu-title">Cetak Lap. Keuangan</span>
+        <span class="menu-title">Laporan Keuangan</span>
       </a>
     </li>
     <li class="nav-item">

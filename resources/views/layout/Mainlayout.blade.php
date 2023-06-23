@@ -7,6 +7,8 @@
 
 @include('layout.partials.head')
 
+@yield('css')
+
 </head>
 
 

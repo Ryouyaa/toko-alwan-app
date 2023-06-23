@@ -5,6 +5,7 @@ use App\Http\Controllers\LostController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembelianBarangController;
 use App\Http\Controllers\PenjualanBarangController;
 
@@ -29,6 +30,10 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 // BARANG HILANG
 Route::get('/daftar-hilang', [LostController::class, 'index']);
+
+// LAPORAN KEUANGAN
+Route::get('/laporan-keuangan', [LaporanController::class, 'index']);
+Route::get('/laporan-keuangan/export', [LaporanController::class, 'export'])->name('laporan.export');
 
 // AUTH
 Route::group(['middleware' => 'auth'], function () {
