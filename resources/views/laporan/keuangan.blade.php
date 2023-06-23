@@ -3,35 +3,17 @@
 @section('css')
 <style>
     @media print {
-
         /* Sembunyikan tombol Print dan Export saat mencetak */
-        .btn-print,
-        .btn-export {
-            display: none;
+        .btn-hide {
+            display: none !important;
         }
 
-        /* Atur tampilan halaman cetakan */
-        body {
-            background: none;
-            padding: 0;
-            margin: 0;
-            font-size: 14px;
+        .sidebar {
+            display: none !important;
         }
 
-        .content-wrapper {
-            width: auto;
-            padding: 0;
-            margin: 0;
-        }
-
-        .card {
-            border: none;
-            box-shadow: none;
-            margin-bottom: 0;
-        }
-
-        .card-body {
-            padding: 0;
+        #profile {
+            display: none !important;
         }
     }
 </style>
@@ -44,10 +26,10 @@
         <div class="card">
             <div class="card-body">
                 <div class="float-end">
-                    <a href="#" class="btn btn-outline-dark d-inline py-2 px-3 btn-print" onclick="printLaporan()"><i
+                    <a href="#" class="btn btn-outline-dark d-inline py-2 px-3 btn-hide" onclick="printLaporan()"><i
                             class="icon-printer"></i> Print</a>
                     <a href="{{ route('laporan.export', ['bulan' => $filterBulan, 'tahun' => $filterTahun]) }}"
-                        class="btn btn-primary text-white me-0 d-inline py-2 px-3 btn-export"><i
+                        class="btn btn-primary text-white me-0 d-inline py-2 px-3 btn-hide"><i
                             class="icon-download"></i> Export</a>
                 </div>
                 <h4 class="card-title">Laporan Keuangan</h4>
@@ -72,7 +54,7 @@
                             </select>
                         </div>
                         <div class="col-md-1 py-2 my-auto">
-                            <button class="btn btn-primary btn-sm">Tampil</button>
+                            <button class="btn btn-primary btn-sm btn-hide">Tampil</button>
                         </div>
                     </div>
                 </form>
@@ -110,18 +92,11 @@
 </div>
 @endsection
 
-@section('scripts')
+@section('page-script')
 <script>
     // Print laporan
   function printLaporan() {
     window.print();
   }
-
-  // Sembunyikan tombol "Print" dan "Export" saat halaman dicetak
-  window.onafterprint = function() {
-    document.querySelectorAll('.btn-print, .btn-export').forEach(function(btn) {
-      btn.style.display = 'none';
-    });
-  };
 </script>
 @endsection

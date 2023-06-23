@@ -17,7 +17,7 @@
   </div>
 
 
-  <div class="navbar-menu-wrapper d-flex align-items-top">
+  <div class="navbar-menu-wrapper d-flex align-items-top" id="profile">
     <ul class="navbar-nav ms-auto">
       @auth
       <p class="mb-0">{{ auth()->user()->name }}</p>

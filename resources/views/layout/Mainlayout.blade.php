@@ -42,6 +42,7 @@
 
 @include('layout.partials.footer-scripts')
 
+{{-- <script src="{{ mix('js/app.js') }}"></script> --}}
 @yield('page-script')
 
 </body>
