@@ -54,7 +54,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#ui-basic">
+      <a class="nav-link" href="/laporan-karyawan">
         <i class="menu-icon mdi mdi-account-box"></i>
         <span class="menu-title">Laporan Karyawan</span>
       </a>

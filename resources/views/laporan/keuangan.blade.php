@@ -73,7 +73,7 @@
                         <tbody>
                             @foreach ($penjualans as $penjualan)
                             <tr>
-                                <td>{{ $penjualans->firstItem() + $loop->index }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $penjualan->tanggal_transaksi }}</td>
                                 <td>{{ $penjualan->user->name }}</td>
                                 <td>{{ $penjualan->detailPenjualan->sum('jumlah') }}</td>
@@ -82,9 +82,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="mt-3">
-                    {{ $penjualans->links() }}
                 </div>
             </div>
         </div>

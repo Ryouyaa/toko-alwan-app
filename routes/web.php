@@ -1,8 +1,12 @@
 <?php
 
+use App\Models\User;
+use App\Models\Penjualan;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LostController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LaporanController;
@@ -20,9 +24,7 @@ use App\Http\Controllers\PenjualanBarangController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [IndexController::class, 'index']);
 
 // LOGIN
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
@@ -34,6 +36,9 @@ Route::get('/daftar-hilang', [LostController::class, 'index']);
 // LAPORAN KEUANGAN
 Route::get('/laporan-keuangan', [LaporanController::class, 'index']);
 Route::get('/laporan-keuangan/export', [LaporanController::class, 'export'])->name('laporan.export');
+
+// LAPORAN KEUANGAN
+Route::get('/laporan-karyawan', [LaporanController::class, 'karyawan']);
 
 // AUTH
 Route::group(['middleware' => 'auth'], function () {

@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Response;
 
+use App\Models\User;
 use App\Models\Penjualan;
+use Carbon\Carbon;
 
 class LaporanController extends Controller
 {
@@ -37,7 +39,7 @@ class LaporanController extends Controller
             $query->whereMonth('tanggal_transaksi', $filterBulan);
         }
 
-        $penjualans = $query->paginate(30);
+        $penjualans = $query->get();
 
         // Mendapatkan daftar tahun unik dari tabel penjualan
         $tahunList = DB::table('penjualans')
@@ -93,5 +95,31 @@ class LaporanController extends Controller
         };
 
         return Response::stream($callback, 200, $headers);
+    }
+
+    public function karyawan()
+    {
+        // Mengambil jumlah transaksi yang dilakukan oleh setiap karyawan
+        $karyawanTransactions = User::select('name', DB::raw('COUNT(*) as count'))
+            ->join('penjualans', 'users.id', '=', 'penjualans.user_id')
+            ->groupBy('name')
+            ->get();
+
+        // Mengambil jumlah barang yang terjual oleh masing-masing karyawan
+        $karyawanSoldItems = User::select('name', DB::raw('SUM(detail_penjualans.jumlah) as total'))
+            ->join('penjualans', 'users.id', '=', 'penjualans.user_id')
+            ->join('detail_penjualans', 'penjualans.id', '=', 'detail_penjualans.penjualan_id')
+            ->groupBy('name')
+            ->get();
+
+        // Mengambil kinerja karyawan berdasarkan jumlah transaksi yang dilakukan
+        $karyawanPerformance = User::select('name', DB::raw('COUNT(*) as count'))
+            ->join('penjualans', 'users.id', '=', 'penjualans.user_id')
+            ->groupBy('name')
+            ->orderBy('count', 'desc')
+            ->limit(5)
+            ->get();
+
+        return view('laporan.karyawan', compact('karyawanTransactions', 'karyawanSoldItems', 'karyawanPerformance'));
     }
 }

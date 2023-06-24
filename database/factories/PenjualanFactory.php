@@ -19,7 +19,7 @@ class PenjualanFactory extends Factory
     {
         return [
             'user_id' => $this->faker->randomElement(User::pluck('id')),
-            'tanggal_transaksi' => fake()->dateTimeThisMonth(),
+            'tanggal_transaksi' => fake()->dateTimeThisYear('+1 years'),
             'total_harga' => fake()->numberBetween(200000, 500000),
         ];
     }
