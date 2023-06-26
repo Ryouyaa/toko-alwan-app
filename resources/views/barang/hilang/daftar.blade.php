@@ -38,6 +38,9 @@
                                     Jumlah Hilang
                                 </th>
                                 <th>
+                                    Kategori
+                                </th>
+                                <th>
                                     Detail
                                 </th>
                                 <th>
