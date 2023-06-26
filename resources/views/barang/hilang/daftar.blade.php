@@ -35,7 +35,7 @@
                                     Nama Barang
                                 </th>
                                 <th>
-                                    Jumlah Hilang
+                                    Jumlah
                                 </th>
                                 <th>
                                     Kategori
