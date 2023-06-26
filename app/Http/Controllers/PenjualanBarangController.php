@@ -80,6 +80,8 @@ class PenjualanBarangController extends Controller
 
     public function updateBarang(Request $request)
     {
+        $updateStok = $request->input('updateStok');
+        $diskon = $request->input('diskon');
         $selectedItemsPenjualan = session()->get('selectedItemsPenjualan', []);
 
         // Menghapus semua elemen dari array $selectedItemsPenjualan
@@ -118,7 +120,7 @@ class PenjualanBarangController extends Controller
         }
 
         // Mengupdate total harga pada data penjualan
-        $penjualan->total_harga = $totalHarga;
+        $penjualan->total_harga = $totalHarga - $diskon; // Mengurangi total dengan diskon
         $penjualan->save();
 
         return redirect('/barang-keluar')->with('success', 'Data berhasil disimpan');

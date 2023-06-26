@@ -87,13 +87,13 @@ class BarangController extends Controller
      */
     public function destroy($id)
     {
-        // Find the data based on the ID
+        // Cari data berdasarkan id
         $data = Barang::findOrFail($id);
 
-        // Delete the data from the database
+        // Delete data dari database
         $data->delete();
 
-        // Redirect or return an appropriate response
+        // Redirect atau mengembalikan response yang sesuai
         return redirect('/daftar-barang')->with('success', 'Data berhasil dihapus');
     }
 }

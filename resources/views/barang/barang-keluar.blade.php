@@ -131,7 +131,7 @@
                                         <input size="10" type="number" name="updateStok[{{ $barang->id }}]"
                                             id="updateStok-{{ $barang->id }}" data-harga="{{ $barang->harga_jual }}"
                                             data-barang-id="{{ $barang->id }}"
-                                            value="{{ old('updateStok.' . $barang->id) }}" min="1" required>
+                                            value="{{ old('updateStok.' . $barang->id) }}" min="1" max="{{ $barang->jumlah_stok }}" required>
                                     </td>
                                     <td id="subtotal-{{ $barang->id }}" class="subtotal">Rp 0</td>
                                     <td>
@@ -154,7 +154,7 @@
                         <div class="col-lg-2 col-4 p-2">
                             <input type="text" class="form-control input-sm" id="diskon" name="diskon">
                         </div>
-                    </div>
+                    </div>                    
                     <div class="d-flex justify-content-end">
                         <div class="col-lg-2 col-4 my-auto">
                             <label>Total</label>

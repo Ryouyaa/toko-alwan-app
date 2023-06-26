@@ -15,7 +15,7 @@
                     </div>
                     @endif
 
-                    <form class="forms-sample" method="post" action="/barangs/{{ $barang->id }}">
+                    <form class="forms-sample" method="POST" action="/barangs/{{ $barang->id }}">
                         @method('put')
                         @csrf
                         <div class="form-group">
@@ -74,7 +74,7 @@
                         </div>
                         <div class="form-group">
                             <label for="satuan" class="form-label">Satuan Barang</label>
-                            <select name="satuan" id="satuan" class="form-select" disabled>
+                            <select name="satuan" id="satuan" class="form-select" readonly>
                                 <option value="{{ $barang->satuan }}" selected>{{ $barang->satuan }}
                                 </option>
                             </select>
