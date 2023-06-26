@@ -8,13 +8,18 @@
       <h2 class="welcome-text pb-2">Selamat Datang, <span class="text-black fw-bold">{{ auth()->user()->name }}</span>
       </h2>
       @endauth
+      @if (session()->has('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      @endif
       <div class="row">
         <div class="col-lg-8 d-flex flex-column">
           <div class="row flex-grow">
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  {{-- isi dari jumlah transaksi perbulan --}}
                   <h4 class="card-title">Jumlah Transaksi per Bulan</h4>
                   <canvas id="transactions-per-year-month-chart"></canvas>
                 </div>
@@ -29,9 +34,10 @@
                 <div class="card-body">
                   <h4 class="card-title">Kirim Daftar Barang</h4>
                   <p class="card-description">Mengirim daftar barang yang sudah dibawah stok minimum ke Google Task.</p>
-                  <button type="button" class="btn btn-info btn-lg btn-block">
-                    Kirim Daftar
-                  </button>
+                  <form action="{{ route('send.task.list') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-info btn-lg btn-block">Kirim Daftar</button>
+                  </form>
                 </div>
               </div>
             </div>

@@ -75,7 +75,6 @@ class BarangController extends Controller
     public function update(BarangRequest $request, Barang $barang)
     {
         $this->authorize('update', $barang);
-
         // Simpan data ke database
         $barang->update($request->validated());
 

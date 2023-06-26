@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'tasks' => [
+            'api_key' => env('GOOGLE_TASKS_API_KEY'),
+        ],
+    ],    
+
 ];

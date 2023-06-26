@@ -25,7 +25,7 @@ class LostRequest extends FormRequest
         return [
             'barang_id' => 'required|exists:barangs,id',
             'jumlah_stok' => 'required|integer',
-            'jumlah_stok' => 'required|string',
+            'kategori' => 'required|string',
             'detail' => 'required|string|max:150',
         ];
     }

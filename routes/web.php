@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\User;
-use App\Models\Penjualan;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LostController;
 use App\Http\Controllers\AdminController;
@@ -25,6 +22,10 @@ use App\Http\Controllers\PenjualanBarangController;
 */
 
 Route::get('/', [IndexController::class, 'index']);
+
+// GOOGLE TASK
+Route::post('/send-task-list', [IndexController::class, 'sendTaskList'])->name('send.task.list');
+Route::get('/callback', [IndexController::class, 'sendTaskList']);
 
 // LOGIN
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
