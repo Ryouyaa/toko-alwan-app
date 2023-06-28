@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Lost;
+use App\Models\Kategori;
+use App\Models\DetailPenjualan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Barang extends Model
 {
@@ -18,8 +21,13 @@ class Barang extends Model
         return $this->hasMany(Lost::class);
     }
 
-    public function detailPenjualan() 
-	{
-	     return $this->hasMany(DetailPenjualan::class);
-	}
+    public function detailPenjualan()
+    {
+        return $this->hasMany(DetailPenjualan::class);
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }

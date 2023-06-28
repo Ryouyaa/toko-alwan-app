@@ -145,7 +145,7 @@
                     </div>
                     @csrf
                     <div class="d-flex justify-content-end mt-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" onclick="return confirm('Anda Yakin?')" class="btn btn-primary">Submit</button>
                         <a class="btn btn-light">Cancel</a>
                     </div>
                 </form>

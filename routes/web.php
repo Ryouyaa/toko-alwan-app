@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembelianBarangController;
 use App\Http\Controllers\PenjualanBarangController;
@@ -50,6 +51,9 @@ Route::group(['middleware' => 'auth'], function () {
     // BARANG
     Route::get('/daftar-barang', [BarangController::class, 'index']);
     Route::resource('barangs', BarangController::class);
+
+    // KATEGORI BARANG
+    Route::resource('/kategori', KategoriController::class);
 
     // BARANG HILANG
     Route::resource('losts', LostController::class);

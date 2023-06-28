@@ -11,7 +11,6 @@
                 <button style="height: 2rem" class="btn btn-outline-secondary justify-content-center py-0" type="submit" id="button-addon2" class="p-0">
                     <i class="icon-search"></i>
                 </button>
-                
             </form>
         </div>
     </div>
@@ -33,7 +32,7 @@
                                     No
                                 </th>
                                 <th>
-                                    ID
+                                    Kode
                                 </th>
                                 <th>
                                     Nama Barang
@@ -59,7 +58,7 @@
                                     {{ $barangs->firstItem() + $loop->index }}
                                 </td>
                                 <td>
-                                    {{ $barang->id }}
+                                    {{ $barang->kode_barang }}
                                 </td>
                                 <td>
                                     {{ $barang->name }}

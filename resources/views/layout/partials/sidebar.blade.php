@@ -15,6 +15,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a class="nav-link" href="/kategori">
+        <i class="menu-icon mdi mdi-view-grid"></i>
+        <span class="menu-title">Kategori Barang</span>
+      </a>
+    </li>
+    <li class="nav-item">
       <a class="nav-link" href="/barangs/create">
         <i class="menu-icon mdi mdi-view-grid-plus"></i>
         <span class="menu-title">Tambah Barang</span>

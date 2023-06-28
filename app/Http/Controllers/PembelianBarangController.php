@@ -18,7 +18,7 @@ class PembelianBarangController extends Controller
         if ($search) {
             $barangs->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%{$search}%")
-                    ->orWhere('id', $search);
+                    ->orWhere('kode_barang', 'LIKE', "%{$search}%");
             });
         }
 
@@ -91,6 +91,6 @@ class PembelianBarangController extends Controller
             $barang->save();
         }
 
-        return redirect('/barang-masuk')->with('success', 'Data berhasil disimpan');
+        return redirect('/barang-masuk')->with('success', 'Data pembelian berhasil disimpan');
     }
 }

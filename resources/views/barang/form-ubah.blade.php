@@ -14,7 +14,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-
                     <form class="forms-sample" method="POST" action="/barangs/{{ $barang->id }}">
                         @method('put')
                         @csrf

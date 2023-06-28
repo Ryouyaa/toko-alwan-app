@@ -20,7 +20,7 @@ class PenjualanBarangController extends Controller
         if ($search) {
             $barangs->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%{$search}%")
-                    ->orWhere('id', $search);
+                    ->orWhere('kode_barang', 'LIKE', "%{$search}%");
             });
         }
 
@@ -117,6 +117,6 @@ class PenjualanBarangController extends Controller
         $penjualan->total_harga = $totalHarga - $diskon; // Mengurangi total dengan diskon
         $penjualan->save();
 
-        return redirect('/barang-keluar')->with('success', 'Data berhasil disimpan');
+        return redirect('/barang-keluar')->with('success', 'Data penjualan berhasil disimpan');
     }
 }

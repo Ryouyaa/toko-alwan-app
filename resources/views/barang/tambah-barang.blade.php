@@ -18,9 +18,8 @@
                         @csrf
                         <div class="form-group">
                             <label for="name">Nama</label>
-                            <input name="name" type="text"
-                                class="form-control @error('name') is-invalid  @enderror" id="name"
-                                placeholder="Nama" value="{{ old('name') }}">
+                            <input name="name" type="text" class="form-control @error('name') is-invalid  @enderror"
+                                id="name" placeholder="Nama" value="{{ old('name') }}">
                             @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -72,10 +71,25 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label for="kategori" class="form-label">Kategori Barang</label>
+                            <select name="kategori_id" id="kategori_id"
+                                class="form-select @error('kategori_id') is-invalid @enderror">
+                                <option value="">Pilih kategori barang</option>
+                                @foreach ($kategoris as $kategori)
+                                <option value="{{ $kategori->id }}">{{ $kategori->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('kategori_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="satuan" class="form-label">Satuan Barang</label>
-                            <select name="satuan" id="satuan" class="form-select @error('satuan') is-invalid  @enderror">
-                                <option value="">Pilih satuan barang</option>
-                                <option value="pcs">pcs</option>
+                            <select name="satuan" id="satuan"
+                                class="form-select @error('satuan') is-invalid  @enderror">
+                                <option value="pcs" selected>pcs</option>
                                 <option value="lusin">lusin</option>
                                 <option value="kodi">kodi</option>
                                 <option value="gross">gross</option>
@@ -90,31 +104,6 @@
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
                         <button class="btn btn-light">Cancel</button>
                     </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Standar Satuan</h4>
-                    <table>
-                        <tr>
-                            <td>1 Lusin</td>
-                            <td>: 12 Pcs</td>
-                        </tr>
-                        <tr>
-                            <td>1 Kodi</td>
-                            <td>: 20 Pcs</td>
-                        </tr>
-                        <tr>
-                            <td>1 Gross</td>
-                            <td>: 144 Pcs</td>
-                        </tr>
-                        <tr>
-                            <td>1 Rim</td>
-                            <td>: 500 Pcs (lembar)</td>
-                        </tr>
-                    </table>
                 </div>
             </div>
         </div>

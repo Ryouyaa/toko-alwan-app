@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 use App\Models\Lost;
@@ -121,16 +120,13 @@ class LostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Lost $lost)
     {
-        $data = Lost::findOrFail($id);
+        $lost->delete();
 
         // Menambah jumlah stok pada tabel barang
-        $barang = Barang::findOrFail($data->barang_id);
-        $barang->increment('jumlah_stok', $data->jumlah_stok);
-
-        // Delete the data from the database
-        $data->delete();
+        $barang = Barang::findOrFail($lost->barang_id);
+        $barang->increment('jumlah_stok', $lost->jumlah_stok);
 
         // Redirect or return an appropriate response
         return redirect('/daftar-hilang')->with('success', 'Data berhasil dihapus');

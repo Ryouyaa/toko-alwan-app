@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Kategori;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,6 +23,8 @@ class BarangFactory extends Factory
             'stok_minimum' => fake()->numberBetween(0, 50),
             'harga_beli' => fake()->numberBetween(5000, 20000),
             'harga_jual' => fake()->numberBetween(20000, 50000),
+            'kode_barang' => $this->faker->regexify('[A-Z0-9]{6}'),
+            'kategori_id' => $this->faker->randomElement(Kategori::pluck('id')),
             'satuan' => fake()->randomElement(['pcs', 'lusin', 'kodi', 'gross', 'rim'])
         ];
     }

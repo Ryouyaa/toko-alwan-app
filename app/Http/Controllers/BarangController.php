@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Barang;
+use App\Models\Kategori;
 use App\Http\Requests\BarangRequest;
 
 class BarangController extends Controller
@@ -21,7 +22,7 @@ class BarangController extends Controller
         if ($search) {
             $barangs->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', "%{$search}%")
-                    ->orWhere('id', $search);
+                    ->orWhere('kode_barang', 'LIKE', "%{$search}%");
             });
         }
 
@@ -30,14 +31,16 @@ class BarangController extends Controller
         $barangs->appends(['search' => $search]); // Menambahkan parameter pencarian ke URL pagination
 
         return view('barang.daftar-barang', compact('barangs'));
-    }  
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('barang.tambah-barang');
+        $kategoris = Kategori::all();
+
+        return view('barang.tambah-barang', compact('kategoris'));
     }
 
     /**
@@ -45,12 +48,28 @@ class BarangController extends Controller
      */
     public function store(BarangRequest $request)
     {
-        // Simpan data ke database
-        Barang::create($request->validated());
+        // Dapatkan kategori berdasarkan id yang dipilih
+        $kategori = Kategori::findOrFail($request->kategori_id);
+
+        // Dapatkan jumlah barang dengan kode kategori yang sama
+        $jumlahBarang = Barang::where('kategori_id', $kategori->id)->count();
+
+        // Generate kode barang dengan format KODEKATEGORI-INCREMENTAL (001, 002, dst.)
+        $kodeBarang = $kategori->kode_kategori . str_pad($jumlahBarang + 1, 3, '0', STR_PAD_LEFT);
+
+        // Buat data barang baru dengan atribut yang valid
+        $barang = new Barang($request->validated());
+
+        // Tambahkan kode barang yang dihasilkan ke dalam atribut 'kode'
+        $barang->kode_barang = $kodeBarang;
+
+        // Simpan data barang ke database
+        $barang->save();
 
         // Redirect atau kembalikan response yang sesuai
         return redirect('/daftar-barang')->with('success', 'Data berhasil disimpan');
     }
+
 
     /**
      * Display the specified resource.
@@ -85,13 +104,9 @@ class BarangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Barang $barang)
     {
-        // Cari data berdasarkan id
-        $data = Barang::findOrFail($id);
-
-        // Delete data dari database
-        $data->delete();
+        $barang->delete();
 
         // Redirect atau mengembalikan response yang sesuai
         return redirect('/daftar-barang')->with('success', 'Data berhasil dihapus');
