@@ -89,12 +89,6 @@ class PenjualanBarangController extends Controller
 
         $updateStok = $request->input('updateStok');
 
-        foreach ($updateStok as $barangId => $jumlahStok) {
-            $barang = \App\Models\Barang::findOrFail($barangId);
-            $barang->jumlah_stok -= $jumlahStok;
-            $barang->save();
-        }
-
         // Membuat data penjualan
         $penjualan = new Penjualan();
         $penjualan->user_id = auth()->user()->id; // Menggunakan user yang sedang login
