@@ -30,7 +30,6 @@ class KategoriController extends Controller
      */
     public function store(KategoriRequest $request)
     {
-
         // Simpan data kategori ke database
         Kategori::create($request->validated());
 
@@ -60,7 +59,7 @@ class KategoriController extends Controller
     public function update(KategoriRequest $request, Kategori $kategori)
     {
         $kategori->name = $request->name;
-        $kategori->kode_kategori = $request->kode_kategori;
+        $kategori->kode_kategori = strtoupper($request->kode_kategori);
         $kategori->save();
 
         return redirect('/kategori')->with('success', 'Data kategori berhasil diubah');

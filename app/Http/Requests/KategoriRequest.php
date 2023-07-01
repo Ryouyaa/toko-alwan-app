@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class KategoriRequest extends FormRequest
 {
@@ -23,7 +24,14 @@ class KategoriRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'kode_kategori' => 'required|max:3',
+            'kode_kategori' => 'required|string|max:3|unique:kategoris',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'kode_kategori' => Str::upper($this->kode_kategori)
+        ]);
     }
 }

@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group">
                             <label for="satuan" class="form-label">Satuan Barang</label>
-                            <select name="satuan" id="satuan" class="form-select" readonly>
+                            <select name="satuan" id="satuan" class="form-select">
                                 <option value="{{ $barang->satuan }}" selected>{{ $barang->satuan }}
                                 </option>
                             </select>

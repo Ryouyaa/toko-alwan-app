@@ -38,6 +38,9 @@
                                     Nama Barang
                                 </th>
                                 <th>
+                                    Kategori Barang
+                                </th>
+                                <th>
                                     Stok Barang
                                 </th>
                                 <th>
@@ -62,6 +65,9 @@
                                 </td>
                                 <td>
                                     {{ $barang->name }}
+                                </td>
+                                <td>
+                                    {{ optional($barang->kategori)->name ?? '-' }}
                                 </td>
                                 <td>
                                     {{ $barang->jumlah_stok }}

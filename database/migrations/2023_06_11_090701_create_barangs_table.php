@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('stok_minimum');
             $table->integer('harga_beli');
             $table->integer('harga_jual');
-            $table->string('kode_barang')->unique();
-            $table->foreignId('kategori_id')->nullable()->constrained('kategoris')->onDelete('set null');
+            $table->string('kode_barang');
+            $table->foreignId('kategori_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
             $table->string('satuan');
             $table->timestamps();
         });
