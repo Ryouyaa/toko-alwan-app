@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Kategori;
 use App\Http\Requests\BarangRequest;
+use App\Http\Requests\BarangUpdateRequest;
 
 class BarangController extends Controller
 {
@@ -91,7 +92,7 @@ class BarangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(BarangRequest $request, Barang $barang)
+    public function update(BarangUpdateRequest $request, Barang $barang)
     {
         $this->authorize('update', $barang);
         // Simpan data ke database

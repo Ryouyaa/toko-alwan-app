@@ -14,13 +14,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     @endif
-                    <form class="forms-sample" method="POST" action="/barangs/{{ $barang->id }}">
+
+                    <form class="forms-sample" method="post" action="/barangs/{{ $barang->id }}">
                         @method('put')
                         @csrf
+                        <input type="hidden" name="kode_barang" value="{{ $barang->kode_barang }}">
                         <div class="form-group">
                             <label for="name">Nama</label>
-                            <input name="name" type="text" class="form-control @error('name') is-invalid  @enderror"
-                                id="name" placeholder="Nama" value="{{ $barang->name }}">
+                            <input name="name" type="text" class="form-control @error('name') is-invalid  @enderror" id="name" placeholder="Nama" value="{{ $barang->name }}">
                             @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
