@@ -34,7 +34,7 @@
                     <div class="form-floating mb-3">
                         <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
                             id="username" placeholder="Masukkan Username" autofocus value="{{ old('username') }}">
-                        <label for="username">Username</label>
+                        <label for="username">Masukkan Username</label>
                         @error('username')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -45,7 +45,7 @@
                         <input type="password" name="password"
                             class="form-control @error('password') is-invalid @enderror" id="password"
                             placeholder="Masukkan Password">
-                        <label for="password">Password</label>
+                        <label for="password">Masukkan Password</label>
                         @error('password')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -53,7 +53,7 @@
                         @enderror
                     </div>
                     <div class="text-center">
-                        <button class="btn btn-primary w-50 py-2" type="submit">Masuk</button>
+                        <button class="btn btn-primary w-50" type="submit">Masuk</button>
                     </div>
                 </form>
             </main>

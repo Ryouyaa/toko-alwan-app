@@ -46,9 +46,12 @@
             <div class="col-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Shortcut Penjualan</h4>
+                  <h4 class="card-title">Shortcut Penjualan/Pembelian</h4>
                   <a href="/barang-keluar" type="button" class="btn btn-primary btn-lg btn-block">
                     Transaksi Penjualan
+                  </a>
+                  <a href="/barang-masuk" type="button" class="btn btn-dark btn-lg btn-block mt-2">
+                    Transaksi Pembelian
                   </a>
                 </div>
               </div>
