@@ -21,7 +21,8 @@
                         <input type="hidden" name="kode_barang" value="{{ $barang->kode_barang }}">
                         <div class="form-group">
                             <label for="name">Nama</label>
-                            <input name="name" type="text" class="form-control @error('name') is-invalid  @enderror" id="name" placeholder="Nama" value="{{ $barang->name }}">
+                            <input name="name" type="text" class="form-control @error('name') is-invalid  @enderror"
+                                id="name" placeholder="Nama" value="{{ $barang->name }}">
                             @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -73,14 +74,25 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="satuan" class="form-label">Satuan Barang</label>
-                            <select name="satuan" id="satuan" class="form-select">
-                                <option value="{{ $barang->satuan }}" selected>{{ $barang->satuan }}
+                            <label for="kategori_id" class="form-label">Kategori Barang</label>
+                            <select name="kategori_id" id="kategori_id"
+                                class="form-select @error('kategori_id') is-invalid @enderror">
+                                <option value="">Pilih kategori barang</option>
+                                @foreach ($kategoris as $kategori)
+                                <option value="{{ $kategori->id }}" {{ $kategori->id == $barang->kategori_id ?
+                                    'selected' : '' }}>
+                                    {{ $kategori->name }}
                                 </option>
+                                @endforeach
                             </select>
+                            @error('kategori_id')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
-                        <button class="btn btn-light">Cancel</button>
+                        <a class="btn btn-light" href="/daftar-barang">Cancel</a>
                     </form>
                 </div>
             </div>

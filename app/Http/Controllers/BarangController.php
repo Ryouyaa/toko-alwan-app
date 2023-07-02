@@ -84,8 +84,11 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
+        $kategoris = Kategori::all();
+
         return view('barang.form-ubah', [
-            'barang' => $barang
+            'barang' => $barang,
+            'kategoris' => $kategoris
         ]);
     }
 
@@ -95,12 +98,18 @@ class BarangController extends Controller
     public function update(BarangUpdateRequest $request, Barang $barang)
     {
         $this->authorize('update', $barang);
+
         // Simpan data ke database
         $barang->update($request->validated());
+
+        // Update kategori barang
+        $barang->kategori_id = $request->kategori_id;
+        $barang->save();
 
         // Redirect atau kembalikan response yang sesuai
         return redirect('/daftar-barang')->with('success', 'Data berhasil disimpan');
     }
+
 
     /**
      * Remove the specified resource from storage.

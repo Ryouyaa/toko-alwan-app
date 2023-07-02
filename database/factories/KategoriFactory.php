@@ -17,7 +17,7 @@ class KategoriFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->word(),
+            'name' => fake()->randomElement(['ATK', 'Mainan Anak', 'Kosmetik', 'Aksesoris', 'Perlengkapan Bayi', 'Alat Olahraga', 'Atribut Pramuka', 'Buku Bacaan', 'Lainnya']),
             'kode_kategori' => $this->faker->regexify('[A-Z]{3}'),
         ];
     }

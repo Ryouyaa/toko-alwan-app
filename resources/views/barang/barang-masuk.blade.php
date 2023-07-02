@@ -34,7 +34,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    ID
+                                    Kode
                                 </th>
                                 <th>
                                     Nama Barang
@@ -54,7 +54,7 @@
                             @foreach ($barangs as $barang)
                             <tr>
                                 <td>
-                                    {{ $barang->id }}
+                                    {{ $barang->kode_barang }}
                                 </td>
                                 <td>
                                     {{ $barang->name }}
@@ -108,7 +108,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Kode</th>
                                     <th>Nama Barang</th>
                                     <th class="d-none d-sm-table-cell">Stok Barang</th>
                                     <th class="d-none d-sm-table-cell">Stok Minimum</th>
@@ -122,7 +122,7 @@
                                 $barang = \App\Models\Barang::findOrFail($barangId);
                                 @endphp
                                 <tr id="barang-row-{{ $barang->id }}">
-                                    <td>{{ $barang->id }}</td>
+                                    <td>{{ $barang->kode_barang }}</td>
                                     <td>{{ $barang->name }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $barang->jumlah_stok }}</td>
                                     <td class="d-none d-sm-table-cell">{{ $barang->stok_minimum }}</td>
@@ -145,8 +145,8 @@
                     </div>
                     @csrf
                     <div class="d-flex justify-content-end mt-3">
+                        <a class="btn btn-light" href="/barang-masuk">Cancel</a>
                         <button type="submit" onclick="return confirm('Anda Yakin?')" class="btn btn-primary">Submit</button>
-                        <a class="btn btn-light">Cancel</a>
                     </div>
                 </form>
                 @endif

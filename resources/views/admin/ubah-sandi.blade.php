@@ -55,7 +55,7 @@
                                 @enderror
                         </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
-                        <button class="btn btn-light">Cancel</button>
+                        <a class="btn btn-light" href="/ubah-sandi">Cancel</a>
                     </form>
                 </div>
             </div>

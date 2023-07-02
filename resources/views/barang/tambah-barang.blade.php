@@ -85,24 +85,8 @@
                             </div>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="satuan" class="form-label">Satuan Barang</label>
-                            <select name="satuan" id="satuan"
-                                class="form-select @error('satuan') is-invalid  @enderror">
-                                <option value="pcs" selected>pcs</option>
-                                <option value="lusin">lusin</option>
-                                <option value="kodi">kodi</option>
-                                <option value="gross">gross</option>
-                                <option value="rim">rim</option>
-                            </select>
-                            @error('satuan')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
-                        <button class="btn btn-light">Cancel</button>
+                        <a class="btn btn-light" href="/daftar-barang">Cancel</a>
                     </form>
                 </div>
             </div>

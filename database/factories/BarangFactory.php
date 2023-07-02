@@ -24,8 +24,7 @@ class BarangFactory extends Factory
             'harga_beli' => fake()->numberBetween(5000, 20000),
             'harga_jual' => fake()->numberBetween(20000, 50000),
             'kode_barang' => $this->faker->regexify('[A-Z0-9]{6}'),
-            'kategori_id' => $this->faker->randomElement(Kategori::pluck('id')),
-            'satuan' => fake()->randomElement(['pcs', 'lusin', 'kodi', 'gross', 'rim'])
+            'kategori_id' => $this->faker->randomElement(Kategori::pluck('id'))
         ];
     }
 }

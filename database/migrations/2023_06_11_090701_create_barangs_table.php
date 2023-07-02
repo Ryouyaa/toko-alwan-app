@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('harga_jual');
             $table->string('kode_barang');
             $table->foreignId('kategori_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('set null');
-            $table->string('satuan');
             $table->timestamps();
         });
     }

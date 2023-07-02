@@ -28,7 +28,6 @@ class BarangRequest extends FormRequest
             'stok_minimum' => 'required|integer',
             'harga_beli' => 'required|integer',
             'harga_jual' => 'required|integer',
-            'satuan' => 'required|string',
         ];
     }
 }

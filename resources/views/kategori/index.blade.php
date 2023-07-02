@@ -90,7 +90,7 @@
                                     <label for="kode_kategori">Kode Kategori</label>
                                     <input name="kode_kategori" type="text"
                                         class="form-control @error('kode_kategori') is-invalid  @enderror"
-                                        id="kode_kategori" placeholder="Maksimal 3 karakter" value="{{ old('kode_kategori') }}">
+                                        id="kode_kategori" placeholder="Wajib 3 karakter" value="{{ old('kode_kategori') }}">
                                     @error('kode_kategori')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -98,7 +98,7 @@
                                     @enderror
                                 </div>
                                 <button type="submit" class="btn btn-primary me-2">Submit</button>
-                                <button class="btn btn-light">Cancel</button>
+                                <a class="btn btn-light" href="/kategori">Cancel</a>
                             </form>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class KategoriRequest extends FormRequest
@@ -22,9 +23,17 @@ class KategoriRequest extends FormRequest
      */
     public function rules(): array
     {
+        $kategoriId = $this->kategori->id; // Mendapatkan ID kategori yang sedang diupdate
+
         return [
             'name' => 'required|string',
-            'kode_kategori' => 'required|string|max:3|unique:kategoris',
+            'kode_kategori' => [
+                'required',
+                'string',
+                'max:3',
+                'min:3',
+                Rule::unique('kategoris')->ignore($kategoriId),
+            ],
         ];
     }
 

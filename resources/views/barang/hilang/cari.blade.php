@@ -28,7 +28,7 @@
                                     No
                                 </th>
                                 <th>
-                                    ID
+                                    Kode Barang
                                 </th>
                                 <th>
                                     Nama Barang
@@ -51,7 +51,7 @@
                                     {{ $barangs->firstItem() + $loop->index }}
                                 </td>
                                 <td>
-                                    {{ $barang->id }}
+                                    {{ $barang->kode_barang }}
                                 </td>
                                 <td>
                                     {{ $barang->name }}
