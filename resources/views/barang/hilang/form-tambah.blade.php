@@ -2,12 +2,12 @@
 
 @section('content-wrapper')
 <div class="content-wrapper">
-    <h2 class="welcome-text mb-3">Barang Hilang</h2>
+    <h2 class="welcome-text mb-3">Barang Hilang / Rusak</h2>
     <div class="row justify-content-center">
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Form Barang Hilang</h4>
+                    <h4 class="card-title">Form Tambah Barang Hilang / Rusak</h4>
                     @if (session()->has('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}

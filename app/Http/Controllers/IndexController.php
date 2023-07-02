@@ -30,6 +30,9 @@ class IndexController extends Controller
         // Menyusun data tahun
         $years = $monthlyTransactions->pluck('year')->unique()->toArray();
 
+        // Mengambil 3 tahun terakhir
+        $years = array_slice($years, -3);
+
         // Menyusun data bulan
         $months = [
             'JAN',
@@ -55,6 +58,11 @@ class IndexController extends Controller
 
             if (!isset($transactionsPerYearMonth[$year])) {
                 $transactionsPerYearMonth[$year] = array_fill(1, 12, 0);
+            }
+
+            // Hanya memproses data untuk 3 tahun terakhir
+            if (!in_array($year, $years)) {
+                continue;
             }
 
             $transactionsPerYearMonth[$year][$month] = $count;

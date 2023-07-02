@@ -110,7 +110,6 @@ class BarangController extends Controller
         return redirect('/daftar-barang')->with('success', 'Data berhasil disimpan');
     }
 
-
     /**
      * Remove the specified resource from storage.
      */

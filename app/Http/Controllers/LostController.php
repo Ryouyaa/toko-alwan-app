@@ -110,8 +110,21 @@ class LostController extends Controller
         // Validasi input dan dapatkan data yang telah lolos validasi
         $validatedData = $request->validated();
 
+        // Simpan jumlah stok awal
+        $stokAwal = $lost->jumlah_stok;
+
         // Simpan data ke database
         $lost->update($validatedData);
+
+        // Hitung selisih stok
+        $selisihStok = $validatedData['jumlah_stok'] - $stokAwal;
+
+        // Periksa dan perbarui jumlah stok barang terkait
+        if ($selisihStok > 0) {
+            $lost->barang->decrement('jumlah_stok', $selisihStok);
+        } elseif ($selisihStok < 0) {
+            $lost->barang->increment('jumlah_stok', abs($selisihStok));
+        }
 
         // Redirect atau kembalikan response yang sesuai
         return redirect('/daftar-hilang')->with('success', 'Data berhasil disimpan');

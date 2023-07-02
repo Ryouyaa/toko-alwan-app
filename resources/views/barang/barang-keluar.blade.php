@@ -15,7 +15,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6 mb-3">
             <form class="search-form input-group rounded" action="/barang-keluar">
-                <input name="search" type="search" class="form-control" placeholder="Search Here" title="Search here">
+                <input name="search" type="search" class="form-control" placeholder="Cari" title="Cari">
                 <button style="height: 2rem" class="btn btn-outline-secondary justify-content-center py-0" type="submit"
                     id="button-addon2" class="p-0">
                     <i class="icon-search"></i>
@@ -45,6 +45,9 @@
                                 <th class="d-none d-sm-table-cell">
                                     Stok Minimum
                                 </th>
+                                <th class="d-none d-sm-table-cell">
+                                    Harga
+                                </th>
                                 <th>
                                     Aksi
                                 </th>
@@ -64,6 +67,9 @@
                                 </td>
                                 <td class="d-none d-sm-table-cell">
                                     {{ $barang->stok_minimum }}
+                                </td>
+                                <td class="d-none d-sm-table-cell">
+                                    Rp {{ number_format($barang->harga_jual, 0, ',', '.') }}
                                 </td>
                                 <td>
                                     <a class="btn btn-primary btn-sm" data-barang-id="{{ $barang->id }}"

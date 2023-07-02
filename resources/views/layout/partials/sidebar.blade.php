@@ -15,15 +15,15 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/kategori">
-        <i class="menu-icon mdi mdi-view-grid"></i>
-        <span class="menu-title">Kategori Barang</span>
-      </a>
-    </li>
-    <li class="nav-item">
       <a class="nav-link" href="/barangs/create">
         <i class="menu-icon mdi mdi-view-grid-plus"></i>
         <span class="menu-title">Tambah Barang</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/kategori">
+        <i class="menu-icon mdi mdi-view-grid"></i>
+        <span class="menu-title">Kategori Barang</span>
       </a>
     </li>
     <li class="nav-item">
@@ -34,8 +34,8 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="/daftar-hilang">Daftar Barang Hilang</a></li>
-          <li class="nav-item"> <a class="nav-link" href="/barang-hilang">Tambah Barang Hilang</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/daftar-hilang">Daftar Hilang / Rusak</a></li>
+          <li class="nav-item"> <a class="nav-link" href="/barang-hilang">Tambah Hilang / Rusak</a></li>
         </ul>
       </div>
     </li>

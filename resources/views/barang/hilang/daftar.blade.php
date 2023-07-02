@@ -7,7 +7,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6 mb-3">
             <form class="search-form input-group rounded" action="/daftar-hilang">
-                <input name="search" type="search" class="form-control" placeholder="Search Here" title="Search here">
+                <input name="search" type="search" class="form-control" placeholder="Cari" title="Cari">
                 <button style="height: 2rem" class="btn btn-outline-secondary justify-content-center py-0" type="submit" id="button-addon2" class="p-0">
                     <i class="icon-search"></i>
                 </button>                
@@ -17,7 +17,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Tabel Barang</h4>
+                <h4 class="card-title">Tabel Barang Hilang</h4>
                 @if (session()->has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}

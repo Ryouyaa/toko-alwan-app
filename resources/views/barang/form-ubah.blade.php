@@ -97,31 +97,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 grid-margin">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Standar Satuan</h4>
-                    <table>
-                        <tr>
-                            <td>1 Lusin</td>
-                            <td>: 12 Pcs</td>
-                        </tr>
-                        <tr>
-                            <td>1 Kodi</td>
-                            <td>: 20 Pcs</td>
-                        </tr>
-                        <tr>
-                            <td>1 Gross</td>
-                            <td>: 144 Pcs</td>
-                        </tr>
-                        <tr>
-                            <td>1 Rim</td>
-                            <td>: 500 Pcs (lembar)</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

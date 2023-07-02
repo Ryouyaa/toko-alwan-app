@@ -67,14 +67,34 @@
 @section('page-script')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+  // Tetapkan warna untuk tahun pertama dan tahun kedua
+  var warnaTetap = '#00eddb';
+  var warnaPertama = '#ed9e00';
+  var warnaKedua = '#9eed00';
+  var warnaKetiga = '#0071e3';
+
   // Jumlah transaksi per bulan per tahun
   var datasets = [];
-  @foreach ($years as $year)
+  @foreach ($years as $index => $year)
+      console.log("Index:", {{ $index }}); // Tampilkan nilai index di konsol browser
+
       var data{{ $year }} = {!! json_encode(array_values($transactionsPerYearMonth[$year] ?? [])) !!};
+      var backgroundColor;
+
+      if ({{ $index }} == 0) {
+          backgroundColor = warnaPertama;
+      } else if ({{ $index }} == 1) {
+          backgroundColor = warnaKedua;
+      } else if ({{ $index }} == 2) {
+          backgroundColor = warnaKetiga;
+      } else {
+          backgroundColor = warnaTetap;
+      }
+
       datasets.push({
           label: 'Tahun {{ $year }}',
           data: data{{ $year }},
-          backgroundColor: getRandomColor(),
+          backgroundColor: backgroundColor,
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1
       });
@@ -95,15 +115,7 @@
           }
       }
   });
-  // Fungsi untuk mendapatkan warna acak
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
 </script>
+
 
 @endsection
