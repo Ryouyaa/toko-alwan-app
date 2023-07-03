@@ -3,17 +3,25 @@
 @section('content-wrapper')
 <div class="content-wrapper">
     <h2 class="welcome-text mb-3">Laporan Karyawan</h2>
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title my-3">Jumlah Transaksi per Karyawan</h4>
-                <canvas id="karyawanTransactionsChart"></canvas>
-
-                <h4 class="card-title my-3">Jumlah Barang yang Dijual per Karyawan</h4>
-                <canvas id="karyawanSoldItemsChart"></canvas>
-
-                <h4 class="card-title my-3">Kinerja Karyawan</h4>
-                <canvas id="karyawanPerformanceChart"></canvas>
+    <div class="row">
+        <div class="col-lg-12 d-flex flex-column">
+            <div class="row flex-grow">
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title my-3">Jumlah Transaksi per Karyawan</h4>
+                            <canvas id="karyawanTransactionsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title my-3">Jumlah Barang yang Dijual per Karyawan</h4>
+                            <canvas id="karyawanSoldItemsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
