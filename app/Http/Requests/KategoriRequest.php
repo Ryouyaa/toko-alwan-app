@@ -23,7 +23,7 @@ class KategoriRequest extends FormRequest
      */
     public function rules(): array
     {
-        $kategoriId = $this->kategori->id; // Mendapatkan ID kategori yang sedang diupdate
+        $kategoriId = $this->id; // Mendapatkan ID kategori yang sedang diupdate
 
         return [
             'name' => 'required|string',
