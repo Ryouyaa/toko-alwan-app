@@ -33,7 +33,7 @@ class AdminController extends Controller
 
         #Match The Old Password
         if(!Hash::check($request->passwordLama, auth()->user()->password)){
-            return back()->with("error", "Old Password Doesn't match!");
+            return back()->with("error", "Password lama tidak sesuai!");
         }
 
 
@@ -42,6 +42,6 @@ class AdminController extends Controller
             'password' => Hash::make($request->passwordBaru)
         ]);
 
-        return back()->with("success", "Password changed successfully!");
+        return back()->with("success", "Password berhasil diubah!");
     }
 }

@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Toko Alwan - App</title>
 
-@vite('resources/css/app.css')
+{{-- @vite('resources/css/app.css') --}}
 <!-- plugins:css -->
 <link rel="stylesheet" href="/vendors/feather/feather.css">
 <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css">
