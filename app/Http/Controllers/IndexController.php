@@ -73,7 +73,7 @@ class IndexController extends Controller
 
     public function sendTaskList(Request $request)
     {
-        // Membaca file kunci service account
+        // Membaca file kunci 
         $keyFile = Storage::path('google-task/toko-alwan-9aec17f34176.json');
 
         // Membuat instance Google_Client dan mengatur autentikasi menggunakan kredensial akun layanan
